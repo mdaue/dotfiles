@@ -1,6 +1,7 @@
 #!/bin/bash
 
 WALLPAPER_REPO="$HOME/wallpaper/"
+LOGGED_IN=$(who | grep ':0\s' | awk '{print $1;}')
 
 wallpaper=( "$WALLPAPER_REPO"/* )
 
