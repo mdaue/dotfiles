@@ -27,3 +27,6 @@ CWD=`pwd`
 cd zsh
 ./setup-zsh.sh
 cd $CWD
+
+# copy background updater
+sudo cp background/change_background.sh /etc/cron.hourly
