@@ -21,3 +21,9 @@ rsync -azP fish/fishd "$HOME/.config/fish/fishd.`hostname`"
 
 # copy i3
 rsync -azP i3/.i3 $HOME/
+
+# copy zsh
+CWD=`pwd`
+cd zsh
+./setup-zsh.sh
+cd $CWD
