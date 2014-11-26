@@ -128,6 +128,6 @@ function find_all_agent_sockets
     printf "%s\n" "$_LIVE_AGENT_LIST" | sed -e 's/ /\n/g' | sort -n -t: -k 2 -k 1
 end
 
-functon set_ssh_agent_socket
+function set_ssh_agent_socket
   set -x SSH_AUTH_SOCK (find_all_agent_sockets|tail -n 1|awk -F: '{print $1}')
 end
