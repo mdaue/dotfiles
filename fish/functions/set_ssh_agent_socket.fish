@@ -28,27 +28,33 @@
 # Original BASH version here: https://github.com/wwalker/ssh-find-agent/blob/master/ssh-find-agent.sh
 ##################################################################################
 
+set -g _LIVE_AGENT_LIST ""
+
 function _debug_print
-    if test count $argv -gt 0 
+    if test (count $argv) -gt 0 
         printf "%s\n" $argv[1]
     end
 end
 
 function find_all_ssh_agent_sockets
     set -g _SSH_AGENT_SOCKETS (find /tmp/ -type s -name agent.\* 2> /dev/null | grep '/tmp/ssh-.*/agent.*')
+    _debug_print $_SSH_AGENT_SOCKETS
 end
 
 function find_all_gpg_agent_sockets
     set -g _GPG_AGENT_SOCKETS (find /tmp/ -type s -name S.gpg-agent.ssh 2> /dev/null | grep '/tmp/gpg-.*/S.gpg-agent.ssh')
+    _debug_print $_GPG_AGENT_SOCKETS
 end
 
 function find_all_gnome_keyring_agent_sockets
     set -g _GNOME_KEYRING_AGENT_SOCKETS (find /tmp/ -type s -name ssh 2> /dev/null | grep '/tmp/keyring-.*/ssh$')
+    _debug_print $_GNOME_KEYRING_AGENT_SOCKETS
 end
 
 function find_all_osx_keychain_agent_sockets
     if test -n "$TMPDIR" 
         set -g _OSX_KEYCHAIN_AGENT_SOCKETS (find $TMPDIR/ -type s -regex '.*/ssh-.*/agent..*$'  2> /dev/null)
+        _debug_print $_OSX_KEYCHAIN_AGENT_SOCKETS
     else
         set -g TMPDIR /tmp
     end
@@ -56,20 +62,22 @@ end
 
 function do_live_agent_list
     if test -n $_LIVE_AGENT_LIST
-        set -x _LIVE_AGENT_LIST "$_LIVE_AGENT_LIST $SOCKET:$_KEY_COUNT"
+        set -g _LIVE_AGENT_LIST "$_LIVE_AGENT_LIST $SOCKET:$_KEY_COUNT"
     else
-        set -x _LIVE_AGENT_LIST "$SOCKET:$_KEY_COUNT"
+        set _LIVE_AGENT_LIST "$SOCKET:$_KEY_COUNT"
     end
+    
+    _debug_print $_LIVE_AGENT_LIST
 end
 
 function test_agent_socket
-    set -x SOCKET $argv[1]
+    set -g SOCKET $argv[1]
     set -g SSH_AUTH_SOCK (ssh-add -l 2> /dev/null > /dev/null)
     set -l result $status
 
     if test $result -eq 0
         # contactible and has keys loaded
-        set -g _KEY_COUNT (set -x SSH_AUTH_SOCK $SOCKET ssh-add -l | wc -l | tr -d ' ')
+        set -g _KEY_COUNT (ssh-add -l | wc -l | tr -d ' ')
     end
 
     if test $result -eq 1
@@ -77,7 +85,7 @@ function test_agent_socket
         set -g _KEY_COUNT 0
     end
 
-    if test $result -eq 0 -o $result -eq 1
+    if not test $result -eq 0 -o $result -eq 1
         do_live_agent_list
         return 0
     end
@@ -110,16 +118,15 @@ function find_live_ssh_agents
 end
 
 function find_all_agent_sockets
-    #set -x _LIVE_AGENT_LIST ""
-    #find_all_ssh_agent_sockets
-    #find_all_gpg_agent_sockets
-    #find_all_gnome_keyring_agent_sockets
-    #find_all_osx_keychain_agent_sockets
-    #find_live_ssh_agents
-    #find_live_gpg_agents
-    #find_live_gnome_keyring_agents
-    #find_live_osx_keychain_agents
-    #printf "%s\n" "$_LIVE_AGENT_LIST" | sed -e 's/ /\n/g' | sort -n -t: -k 2 -k 1
+    find_all_ssh_agent_sockets
+    find_all_gpg_agent_sockets
+    find_all_gnome_keyring_agent_sockets
+    find_all_osx_keychain_agent_sockets
+    find_live_ssh_agents
+    find_live_gpg_agents
+    find_live_gnome_keyring_agents
+    find_live_osx_keychain_agents
+    printf "%s\n" "$_LIVE_AGENT_LIST" | sed -e 's/ /\n/g' | sort -n -t: -k 2 -k 1
 end
 
 function set_ssh_agent_socket

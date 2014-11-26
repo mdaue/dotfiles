@@ -8,3 +8,5 @@ alias vi='vim'
 set -x TERMINAL roxterm
 set -x EDITOR vim
 
+# Run SSH agent
+set_ssh_agent_socket
