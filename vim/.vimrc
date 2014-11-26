@@ -136,7 +136,6 @@ map <C-x> :wq!<CR>
 map <C-right> <ESC>:bn<CR>
 map <C-left> <ESC>:bp<CR>
 map <C-}> <ESC><C-x><C-u>
-map jk <ESC>
 
 set guifont=Andale\ Mono:h14
 
