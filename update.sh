@@ -22,11 +22,8 @@ rsync -azP fish/fishd "$HOME/.config/fish/fishd.`hostname`"
 # copy i3
 rsync -azP i3/.i3 $HOME/
 
-# copy zsh
-CWD=`pwd`
-cd zsh
-./setup-zsh.sh
-cd $CWD
+# copy systemd scripts
+rsync -azP systemd $HOME/.config/
 
 # copy background updater
 sudo cp background/change_background.sh /etc/cron.hourly
