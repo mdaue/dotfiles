@@ -120,6 +120,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+bindsym $mod+Shift+p exec 'dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend'
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -175,7 +177,7 @@ bindsym $mod+minus scratchpad show
 exec xcompmgr -c -f -n
 
 # Lock screen
-bindsym $mod+Shift+p exec i3lock -c '#000000'
+bindsym $mod+p exec i3lock -c '#000000'
 
 # Multimedia Keys
 # Pulse Audio controls
