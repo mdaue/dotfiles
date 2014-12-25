@@ -86,6 +86,10 @@ map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>ev :vsplit ${MYVIMRC}<cr>
 nnoremap <leader>sv :source ${MYVIMRC}<cr>
 inoremap jk <esc>
+onoremap h j
+onoremap j k
+onoremap k l
+onoremap l ;
 "inoremap <esc> <nop>
 nnoremap <leader>gs :Git status<cr>
 nnoremap <leader>gd :Git diff<cr>
