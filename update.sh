@@ -26,4 +26,4 @@ rsync -azP i3/.i3 $HOME/
 rsync -azP systemd $HOME/.config/
 
 # copy background updater
-sudo cp background/change_background.sh /etc/cron.hourly
+sudo cp backgrounds/change_background.sh /etc/cron.hourly
