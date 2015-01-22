@@ -60,7 +60,7 @@
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 
   # Added from Sam's:
-    subup = submodule update --recursive --merge --checkout --force
+  subup = submodule update --recursive --merge --checkout --force
   prom = pull --rebase origin master
   prum = pull --rebase upstream master
   prrsm = pull --recurse-submodules --rebase
@@ -68,7 +68,7 @@
   pum = push upstream master
   subprom = submodule foreach git pull --rebase origin master
   subpull = submodule foreach "(git checkout master && git pull origin master)&"
-  subinit = submodule init --recursive
+  subinit = submodule update --init --recursive
   subup = submodule update
   cam = commit -am
   cm = commit -m
