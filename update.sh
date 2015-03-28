@@ -22,6 +22,10 @@ rsync -azP fish/fishd "$HOME/.config/fish/fishd.`hostname`"
 # copy i3
 rsync -azP i3/.i3 $HOME/
 
+# copy zsh stuff
+rsync -azP zsh/oh-my-zsh $HOME/.oh-my-zsh
+rsync -azP zsh/.zshrc $HOME/.zshrc
+
 # copy systemd scripts
 rsync -azP systemd $HOME/.config/
 
