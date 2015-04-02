@@ -121,10 +121,13 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Quick workspaces:
-bindsym $mod+Ctrl+v workspace vim
-bindsym $mod+Ctrl+b workspace browser
-bindsym $mod+Ctrl+m workspace mail
-bindsym $mod+Ctrl+t workspace term
+bindsym $mod+Ctrl+Alt+v workspace vim
+bindsym $mod+Ctrl+Alt+b workspace browser
+bindsym $mod+Ctrl+Alt+m workspace mail
+bindsym $mod+Ctrl+Alt+t workspace term
+bindsym $mod+Ctrl+Alt+c workspace comms
+bindsym $mod+Ctrl+Shift+m workspace media
+bindsym $mod+Ctrl+Shift+v workspace vms
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

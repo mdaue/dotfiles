@@ -67,7 +67,8 @@
   pom = push origin master
   pum = push upstream master
   subprom = submodule foreach git pull --rebase origin master
-  subpull = submodule foreach "(git checkout master && git pull origin master)&"
+  subrh = submodule foreach git reset --hard 
+  subpull = submodule foreach "(git checkout master && git pull origin master)"
   subinit = submodule update --init --recursive
   subup = submodule update
   cam = commit -am
