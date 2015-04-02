@@ -98,6 +98,8 @@ nnoremap <leader>gfm :Git pull origin master<cr>
 nnoremap <leader>gc :Gcommit<cr>
 nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>stm :SyntasticToggleMode<cr>
+nnoremap <leader>oh :e %<.h<cr>
+nnoremap <leader>oc :e %<.cpp<cr>
 inoremap <C-v> <esc>l"+gPa
 nnoremap <C-v> "+gPa
 vnoremap <C-c> "+y

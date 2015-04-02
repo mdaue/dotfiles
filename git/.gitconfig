@@ -66,6 +66,7 @@
   prrsm = pull --recurse-submodules --rebase
   pom = push origin master
   pum = push upstream master
+  subcm = submodule foreach git checkout master
   subprom = submodule foreach git pull --rebase origin master
   subrh = submodule foreach git reset --hard 
   subpull = submodule foreach "(git checkout master && git pull origin master)"
