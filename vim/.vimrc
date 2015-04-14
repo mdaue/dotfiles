@@ -127,7 +127,7 @@ set number
 set smarttab
 set expandtab
 set autoindent
-colorscheme wombat256mod
+colorscheme monokai
 map     <F12>   :nohlsearch<CR>
 imap    <F12>   <ESC>:nohlsearch<CR>i
 vmap    <F12>   <ESC>:nohlsearch<CR>gv
