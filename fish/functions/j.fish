@@ -7,7 +7,7 @@ end
 
 
 # enable tab completion
-complete -x -c j -a '(autojump --complete (commandline -t))'
+complete -x -c j -a '(autojump -b --complete (commandline -t))'
 
 
 # set error file location
@@ -31,7 +31,7 @@ end
 function j
     switch "$argv"
         case '-*' '--*'
-            autojump $argv
+            autojump -b $argv
         case '*'
             set -l output (autojump $argv)
             if test -d "$output"
