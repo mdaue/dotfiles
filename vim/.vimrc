@@ -78,6 +78,8 @@ noremap <C-P> :CtrlP<CR>
 noremap <C-L> :CtrlPBuffer<CR>
 nnoremap <C-S> :CtrlPSSH<CR>
 
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -111,6 +113,7 @@ nnoremap <silent> <A-Space> @=(foldlevel('.')?'zA':"\<Space>")<CR>
 vnoremap <Space> zf
 nnoremap <leader>w :bd<cr>
 
+colorscheme monokai
 set mouse=a
 "set term=xterm
 set tabstop=4
@@ -146,8 +149,4 @@ if has("gui_running")
     set guifont="Droid Sans Mono:h10"
 endif
 
-if $COLORTERM == 'gnome-terminal'
 set t_Co=256
-endif
-
-colorscheme monokai
