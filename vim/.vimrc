@@ -127,7 +127,6 @@ set number
 set smarttab
 set expandtab
 set autoindent
-colorscheme monokai
 map     <F12>   :nohlsearch<CR>
 imap    <F12>   <ESC>:nohlsearch<CR>i
 vmap    <F12>   <ESC>:nohlsearch<CR>gv
@@ -143,10 +142,12 @@ map <C-right> <ESC>:bn<CR>
 map <C-left> <ESC>:bp<CR>
 map <C-}> <ESC><C-x><C-u>
 
-set guifont="Droid Sans Mono:h10"
+if has("gui_running")
+    set guifont="Droid Sans Mono:h10"
+endif
 
-"if $COLORTERM == 'gnome-terminal'
+if $COLORTERM == 'gnome-terminal'
 set t_Co=256
-"endif
+endif
 
-set shell=bash
+colorscheme monokai
