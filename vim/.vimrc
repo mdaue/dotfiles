@@ -143,7 +143,7 @@ map <C-right> <ESC>:bn<CR>
 map <C-left> <ESC>:bp<CR>
 map <C-}> <ESC><C-x><C-u>
 
-set guifont=Droid Sans Mono:h10
+set guifont="Droid Sans Mono:h10"
 
 "if $COLORTERM == 'gnome-terminal'
 set t_Co=256
