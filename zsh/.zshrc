@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export TERMINAL=/usr/bin/roxterm
+export COLORTERM=roxterm
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -24,7 +25,7 @@ export UPDATE_ZSH_DAYS=13
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -46,7 +47,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux autojump autopep8 battery chucknorris colorize colored-man common-aliases django docker emoji-clock git git-extras git-flow golang history history-substring-search python ssh-agent sudo systemd themes vim-interaction vi-mode)
+plugins=(git archlinux autojump autopep8 battery chucknorris colorize colored-man common-aliases django docker git git-extras git-flow history-substring-search python ssh-agent sudo systemd themes )
 
 # User configuration
 
@@ -80,3 +81,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi='vim'
+alias dmake='cmake -DCMAKE_BUILD_TYPE=Debug ..'
+alias vrun='valgrind --leak-check=full --track-origins=yes'
+alias keys='ssh-add ~/.ssh/id_home; ssh-add ~/.ssh/id_carbyne; ssh-add ~/.ssh/git_carbyne'
