@@ -24,7 +24,7 @@ rsync -azP i3/.i3 $HOME/
 
 # copy zsh stuff
 rsync -azP zsh/oh-my-zsh $HOME/
-mv $HOME/oh-my-zsh $HOME/.oh-my-zsh
+mv $HOME/oh-my-zsh/* $HOME/.oh-my-zsh
 rsync -azP zsh/.zshrc $HOME/.zshrc
 
 # copy systemd scripts
