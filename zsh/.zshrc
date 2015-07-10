@@ -2,6 +2,8 @@
 export ZSH=$HOME/.oh-my-zsh
 export TERMINAL=/usr/bin/roxterm
 export COLORTERM=roxterm
+export WINEARCH=win32
+export WINEPREFIX=$HOME/.win32
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -84,3 +86,5 @@ alias vi='vim'
 alias dmake='cmake -DCMAKE_BUILD_TYPE=Debug ..'
 alias vrun='valgrind --leak-check=full --track-origins=yes'
 alias keys='ssh-add ~/.ssh/id_home; ssh-add ~/.ssh/id_carbyne; ssh-add ~/.ssh/git_carbyne'
+alias rdp='rdesktop -g1300x800'
+alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >/dev/null 2>&1 &'
