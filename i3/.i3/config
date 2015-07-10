@@ -121,6 +121,8 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Quick workspaces:
+bindsym $mod+Ctrl+a workspace atom
+bindsym $mod+Ctrl+s workspace sublime
 bindsym $mod+Ctrl+v workspace vim
 bindsym $mod+Ctrl+b workspace browser
 bindsym $mod+Ctrl+m workspace mail
@@ -128,6 +130,13 @@ bindsym $mod+Ctrl+t workspace term
 bindsym $mod+Ctrl+c workspace comms
 bindsym $mod+Ctrl+Shift+m workspace media
 bindsym $mod+Ctrl+Shift+v workspace vms
+
+bindsym $mod+Shift+Ctrl+a move container to workspace atom
+bindsym $mod+Shift+Ctrl+s move container to workspace sublime
+bindsym $mod+Shift+Ctrl+b move container to workspace browser
+bindsym $mod+Shift+Ctrl+t move container to workspace term
+bindsym $mod+Shift+Ctrl+c move container to workspace comms
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
