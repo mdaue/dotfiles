@@ -70,6 +70,9 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# Touchpad Toggle:
+bindsym $mod+t exec ~/bin/toggletouchpad.sh # toggle touchpad
+
 # split in horizontal orientation
 bindsym $mod+h split h
 
@@ -215,7 +218,6 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Touchpad controls
-bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -224,3 +226,4 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 exec --no-startup-id nm-applet
+exec /etc/cron.hourly/change_background.sh

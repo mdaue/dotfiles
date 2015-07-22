@@ -5,6 +5,9 @@
 rsync -azP git/.gitconfig $HOME/
 rsync -azP git/.gitignore $HOME/
 
+mkdir -p $HOME/bin
+rsync -azP bin/ $HOME/bin/
+
 # copy vim
 rsync -azP vim/.vimrc $HOME/
 rsync -azP vim/.vim $HOME/
