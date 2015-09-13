@@ -2,6 +2,8 @@
 export ZSH=$HOME/.oh-my-zsh
 export TERMINAL=/usr/bin/roxterm
 export COLORTERM=roxterm
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
 export WINEARCH=win32
 export WINEPREFIX=$HOME/.win32
 
