@@ -112,6 +112,7 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 nnoremap <silent> <A-Space> @=(foldlevel('.')?'zA':"\<Space>")<CR>
 vnoremap <Space> zf
 nnoremap <leader>w :bd<cr>
+cmap w!! w !sudo tee > /dev/null %
 
 colorscheme monokai
 set mouse=a
