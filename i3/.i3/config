@@ -127,6 +127,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Ctrl+a workspace atom
 bindsym $mod+Ctrl+s workspace sublime
 bindsym $mod+Ctrl+v workspace vim
+bindsym $mod+Ctrl+g workspace git
 bindsym $mod+Ctrl+b workspace browser
 bindsym $mod+Ctrl+m workspace mail
 bindsym $mod+Ctrl+t workspace term
@@ -206,6 +207,8 @@ exec xcompmgr -c -f -n
 
 # Lock screen
 bindsym $mod+p exec i3lock -c '#000000'
+bindsym $mod+Ctrl+d exec /home/ddos/.screenlayout/dual_screen.sh
+bindsym $mod+Ctrl+Shift+d exec /home/ddos/.screenlayout/single_screen.sh
 
 # Multimedia Keys
 # Pulse Audio controls

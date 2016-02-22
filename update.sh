@@ -33,5 +33,8 @@ rsync -azP zsh/.zshrc $HOME/.zshrc
 # copy systemd scripts
 rsync -azP systemd $HOME/.config/
 
+# copy screenlayouts
+rsync -azP screenlayout/.screenlayout $HOME/
+
 # copy background updater
 sudo cp backgrounds/change_background.sh /usr/bin/change_background.sh
