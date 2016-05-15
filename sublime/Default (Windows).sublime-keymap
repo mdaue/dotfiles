@@ -1,0 +1,22 @@
+[
+	{
+	    "keys": ["j", "k"],
+	    "command": "_enter_normal_mode",
+	    "args": {
+	      "mode": "mode_insert"
+	    },
+	    "context": [{"key": "vi_insert_mode_aware"}]
+	},
+	{
+	  	"keys": ["ctrl+j"], "command": "move", "args": { "by": "characters", "forward": false }
+	},
+	{
+		"keys": ["ctrl+l"], "command": "move", "args": { "by": "lines", "forward": true }
+	},
+	{
+		"keys": ["ctrl+k"], "command": "move", "args": { "by": "lines", "forward": false }
+	},
+	{
+		"keys": ["ctrl+;"], "command": "move", "args": { "by": "characters", "forward": true }
+	},
+]
