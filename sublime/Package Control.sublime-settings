@@ -1,0 +1,19 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"1337 Color Scheme",
+		"Fold Python",
+		"Git",
+		"GitGutter",
+		"Keymaps",
+		"Package Control",
+		"PackageSync",
+		"Python Improved",
+		"SublimeGit",
+		"Vintageous"
+	]
+}
