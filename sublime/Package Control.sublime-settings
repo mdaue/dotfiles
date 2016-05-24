@@ -6,14 +6,20 @@
 	"installed_packages":
 	[
 		"1337 Color Scheme",
-		"Fold Python",
+		"AceJump",
 		"Git",
 		"GitGutter",
+		"Jedi - Python autocompletion",
 		"Keymaps",
 		"Package Control",
 		"PackageSync",
 		"Python Improved",
 		"SublimeGit",
+		"SublimeLinter",
+		"SublimeLinter-annotations",
+		"SublimeLinter-cpplint",
+		"SublimeLinter-flake8",
+		"SublimeLinter-pylint",
 		"Vintageous"
 	]
 }

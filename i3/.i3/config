@@ -29,6 +29,9 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# start sublime editor
+bindsym $mod+Ctrl+Return exec /opt/sublime_text/sublime_text
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -38,6 +41,14 @@ bindsym $mod+Shift+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 # Move left and right
 bindsym $mod+x workspace next
 bindsym $mod+z workspace prev
+bindsym $mod+Ctrl+Shift+Left move workspace to output left
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
+bindsym $mod+Ctrl+Shift+Up move workspace to output up
+bindsym $mod+Ctrl+Shift+Down move workspace to output down
+bindsym $mod+Ctrl+Left focus output left
+bindsym $mod+Ctrl+Right focus output right
+bindsym $mod+Ctrl+Up focus output up
+bindsym $mod+Ctrl+Down focus output down
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
