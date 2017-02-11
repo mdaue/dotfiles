@@ -13,6 +13,10 @@ rsync -azP vim/.vimrc $HOME/
 rsync -azP vim/.vim $HOME/
 rsync -azP vim/.gvimrc $HOME/
 
+# copy nvim
+rsync -azP nvim/.config $HOME/
+echo "alias vi=nvim" >> $HOME/.bashrc
+
 # copy fish
 if [ ! -d "$HOME/.config/fish" ]
 then
