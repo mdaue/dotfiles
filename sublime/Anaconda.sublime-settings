@@ -2,5 +2,6 @@
 	"pep8_ignore":
 	[
 	    "E501"
-	]
+	],
+    "anaconda_linter_mark_style": "squiggly_underline"
 }

@@ -216,6 +216,9 @@ bindsym $mod+minus scratchpad show
 # Transparency
 exec xcompmgr -c -f -n
 
+# Turn on Palm Sensitivity
+synclient PalmDetect=1
+
 # Lock screen
 bindsym $mod+p exec i3lock -c '#000000'
 bindsym $mod+Ctrl+d exec /home/ddos/.screenlayout/dual_screen.sh

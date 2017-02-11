@@ -1,28 +1,32 @@
 {
-	"bootstrapped": true,
-	"in_process_packages":
-	[
-	],
-	"installed_packages":
-	[
-		"1337 Color Scheme",
-		"AceJump",
-		"Anaconda",
-		"Git",
-		"GitGutter",
-		"Jedi - Python autocompletion",
-		"Keymaps",
-		"Markdown Preview",
-		"MarkdownEditing",
-		"Package Control",
-		"PackageSync",
-		"Python Improved",
-		"SublimeGit",
-		"SublimeLinter",
-		"SublimeLinter-annotations",
-		"SublimeLinter-cpplint",
-		"SublimeLinter-flake8",
-		"SublimeLinter-pylint",
-		"Vintageous"
-	]
+    "bootstrapped": true, 
+    "in_process_packages": [], 
+    "installed_packages": [
+        "1337 Color Scheme", 
+        "AceJump", 
+        "Anaconda", 
+        "CTags", 
+        "Git", 
+        "GitGutter", 
+        "HTML5", 
+        "Keymaps", 
+        "Markdown Preview", 
+        "MarkdownEditing", 
+        "Nodejs", 
+        "Package Control", 
+        "PackageSync", 
+        "Python Improved", 
+        "SublimeCodeIntel", 
+        "SublimeGit", 
+        "SublimeLinter", 
+        "SublimeLinter-annotations", 
+        "SublimeLinter-cpplint", 
+        "SublimeLinter-flake8", 
+        "SublimeLinter-pylint", 
+        "Sync Settings", 
+        "Theme - Cola", 
+        "Theme - Soda", 
+        "Vintageous", 
+        "Sync Settings"
+    ]
 }

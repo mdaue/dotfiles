@@ -1,0 +1,2 @@
+sudo apt-get install thunar
+xdg-mime default Thunar.desktop inode/directory
