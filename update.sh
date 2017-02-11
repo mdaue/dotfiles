@@ -10,8 +10,8 @@ rsync -azP bin/ $HOME/bin/
 
 # copy vim
 rsync -azP vim/.vimrc $HOME/
-rsync -azP vim/.vim $HOME/
-rsync -azP vim/.gvimrc $HOME/
+# Start VIM plugin install
+vim +PluginInstall +qall
 
 # copy nvim
 rsync -azP nvim/.config $HOME/
@@ -22,6 +22,7 @@ if [ ! -d "$HOME/.config/fish" ]
 then
     mkdir -p "$HOME/.config/fish"
 fi
+
 rsync -azP fish/config.fish $HOME/.config/fish/
 rsync -azP fish/functions $HOME/.config/fish/
 rsync -azP fish/fishd "$HOME/.config/fish/fishd.`hostname`"
