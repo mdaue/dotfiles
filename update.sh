@@ -29,6 +29,8 @@ rsync -azP fish/fishd "$HOME/.config/fish/fishd.`hostname`"
 
 # copy i3
 rsync -azP i3/.i3 $HOME/
+sudo cp i3/i3lock.service /etc/systemd/system/
+sudo systemctl enable i3lock.service
 
 # copy zsh stuff
 rsync -azP zsh/oh-my-zsh $HOME/
