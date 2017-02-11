@@ -15,7 +15,6 @@ vim +PluginInstall +qall
 
 # copy nvim
 rsync -azP nvim/.config $HOME/
-echo "alias vi=nvim" >> $HOME/.bashrc
 
 # copy fish
 if [ ! -d "$HOME/.config/fish" ]

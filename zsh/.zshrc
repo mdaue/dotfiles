@@ -85,7 +85,7 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vi='vim'
+alias vi='nvim'
 alias dmake='cmake -DCMAKE_BUILD_TYPE=Debug ..'
 alias vrun='valgrind --leak-check=full --track-origins=yes'
 alias keys='ssh-add ~/.ssh/id_home; ssh-add ~/.ssh/id_carbyne; ssh-add ~/.ssh/git_carbyne'
