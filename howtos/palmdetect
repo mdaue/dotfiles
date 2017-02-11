@@ -1,2 +1,0 @@
-synclient -l  # to list all settings
-synclient PalmDetect=1
