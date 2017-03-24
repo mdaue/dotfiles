@@ -724,7 +724,7 @@ vnoremap <Space> zf
 nnoremap <leader>w :bd<cr>
 cmap w!! w !sudo tee > /dev/null %
 
-colorscheme desert
+colorscheme molokai
 set mouse=a
 "set term=xterm
 set tabstop=4
