@@ -8,6 +8,9 @@ rsync -azP git/.gitignore $HOME/
 mkdir -p $HOME/bin
 rsync -azP bin/ $HOME/bin/
 
+# copy tmux
+rsync -azP tmux/.tmux.conf $HOME/
+
 # copy vim
 rsync -azP vim/.vimrc $HOME/
 # Start VIM plugin install
