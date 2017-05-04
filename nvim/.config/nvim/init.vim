@@ -42,6 +42,7 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
+Plug 'easymotion/vim-easymotion'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
@@ -761,3 +762,6 @@ if has("gui_running")
 endif
 
 set t_Co=256
+
+" Enable deoplete at startup
+let g:deoplete#enable_at_startup = 1
