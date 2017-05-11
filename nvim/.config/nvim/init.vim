@@ -9,7 +9,7 @@ endif
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
 let g:vim_bootstrap_langs = "c,go,html,javascript,python"
-let g:vim_bootstrap_editor = "nvim"				" nvim or vim
+let g:vim_bootstrap_editor = "nvim"             " nvim or vim
 
 if !filereadable(vimplug_exists)
   echo "Installing Vim-Plug..."
@@ -543,8 +543,8 @@ augroup END
 " vim-python
 augroup vimrc-python
   autocmd!
-  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
-      \ formatoptions+=croq softtabstop=4 smartindent
+  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 colorcolumn=79
+      \ formatoptions+=croq smartindent
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
@@ -622,30 +622,6 @@ endif
 " END VIM BOOTSTRAP: vim-bootstrap.com
 
 
-" TagBar
-nmap <F4> :TagbarToggle<CR>
-
-" Ultisnips
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<F5>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-set runtimepath+=~/.vim/bundle/vim-snippets/UltiSnips
-
-" Airline
-let g:airline#extensions#tabline#enabled = 1
-
-" Multicursor
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_start_key='<F6>'
-let g:multi_cursor_next_key='<F7>'
-let g:multi_cursor_prev_key='<F8>'
-let g:multi_cursor_skip_key='<F9>'
-let g:multi_cursor_quit_key='<Esc>'
-
-" If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
-
 " Easy Align hooks
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -653,48 +629,10 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
 
-" Vim
-set hidden
-set backspace=indent,eol,start
-set history=1000         " remember more commands and search history
-set undolevels=1000      " use many muchos levels of undo
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep
-set nobackup
-set noswapfile
-set pastetoggle=<F2>
-
-" Airline specific tweaks
-set laststatus=2
-set ttimeoutlen=50
-
-" clang helper settings
-let g:clang_user_options = "-I/usr/include/c++/4.6"
-let g:clang_library_path = "/usr/lib64/llvm"
-let g:clang_complete_auto = 1
-
-" syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_c_checkers = ['gcc', 'oclint']
-
-" Sparkup
-let g:sparkupExecuteMapping = '<f3>'
-let g:sparkupNextMapping = '<f4>'
-
-" CTRLP
-let g:ctrlp_extensions = ['ssh']
-let g:ctrlp_ssh_runner = 'tmux'
-
 " Map CTRLPBuffer
 noremap <C-P> :CtrlP<CR>
 noremap <C-L> :CtrlPBuffer<CR>
 nnoremap <C-S> :CtrlPSSH<CR>
-
-" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -728,26 +666,13 @@ cmap w!! w !sudo tee > /dev/null %
 colorscheme molokai
 set mouse=a
 "set term=xterm
-set tabstop=4
-set softtabstop=4
 set smartcase
 set shiftwidth=4
 syntax on
 filetype plugin indent on
-set nocompatible
-set wildmenu
-set showcmd
-set background=dark
-set number
-set smarttab
-set expandtab
-set autoindent
 map     <F12>   :nohlsearch<CR>
 imap    <F12>   <ESC>:nohlsearch<CR>i
 vmap    <F12>   <ESC>:nohlsearch<CR>gv
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
-autocmd BufRead,BufNewFile *.py inoremap # X#
 
 set foldmethod=marker
 
@@ -760,8 +685,6 @@ map <C-}> <ESC><C-x><C-u>
 if has("gui_running")
     set guifont="Droid Sans Mono:h10"
 endif
-
-set t_Co=256
 
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
