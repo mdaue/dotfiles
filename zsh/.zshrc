@@ -92,5 +92,3 @@ alias keys='ssh-add ~/.ssh/id_home; ssh-add ~/.ssh/id_carbyne; ssh-add ~/.ssh/gi
 alias rdp='rdesktop -g1300x800'
 alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >/dev/null 2>&1 &'
 
-# Set VI mode
-set -o vi
