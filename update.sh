@@ -39,6 +39,7 @@ sudo systemctl enable i3lock.service
 
 # copy zsh stuff
 rsync -azP zsh/oh-my-zsh $HOME/
+mkdir $HOME/.oh-my-zsh
 mv $HOME/oh-my-zsh/* $HOME/.oh-my-zsh
 rsync -azP zsh/.zshrc $HOME/.zshrc
 
