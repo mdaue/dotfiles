@@ -697,7 +697,7 @@ noremap <C-L> :CtrlPBuffer<CR>
 nnoremap <C-S> :CtrlPSSH<CR>
 
 " YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
