@@ -59,7 +59,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+source /usr/bin/virtualenvwrapper.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -91,6 +91,3 @@ alias vrun='valgrind --leak-check=full --track-origins=yes'
 alias keys='ssh-add ~/.ssh/id_home; ssh-add ~/.ssh/id_carbyne; ssh-add ~/.ssh/git_carbyne'
 alias rdp='rdesktop -g1300x800'
 alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >/dev/null 2>&1 &'
-
-# Set VI mode
-set -o vi

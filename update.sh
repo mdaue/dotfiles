@@ -5,6 +5,9 @@
 rsync -azP git/.gitconfig $HOME/
 rsync -azP git/.gitignore $HOME/
 
+# copy .gdbinit
+rsync -azP gdb/.gdbinit $HOME/
+
 mkdir -p $HOME/bin
 rsync -azP bin/ $HOME/bin/
 
@@ -44,6 +47,3 @@ rsync -azP systemd $HOME/.config/
 
 # copy screenlayouts
 rsync -azP screenlayout/.screenlayout $HOME/
-
-# copy background updater
-sudo cp backgrounds/change_background.sh /usr/bin/change_background.sh
