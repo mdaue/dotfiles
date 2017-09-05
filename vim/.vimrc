@@ -43,15 +43,20 @@ Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
 
+Plug 'Valloric/YouCompleteMe'
+Plug 'vim-scripts/ShowFunc.vim'
+Plug 'lilydjwg/colorizer'
+
 let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
 endif
 Plug 'Shougo/vimproc.vim', {'do': g:make}
 
-"" Vim-Session
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
+" session management
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
+Plug 'gikmx/ctrlp-obsession'
 
 if v:version >= 703
   Plug 'Shougo/vimshell.vim'
@@ -98,7 +103,7 @@ Plug 'jelera/vim-javascript-syntax'
 " python
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
-
+Plug 'vim-scripts/indentpython.vim'
 
 "*****************************************************************************
 "*****************************************************************************

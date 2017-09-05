@@ -5,6 +5,9 @@
 rsync -azP git/.gitconfig $HOME/
 rsync -azP git/.gitignore $HOME/
 
+# copy .gdbinit
+rsync -azP gdb/.gdbinit $HOME/
+
 mkdir -p $HOME/bin
 rsync -azP bin/ $HOME/bin/
 
@@ -36,6 +39,7 @@ sudo systemctl enable i3lock.service
 
 # copy zsh stuff
 rsync -azP zsh/oh-my-zsh $HOME/
+mkdir $HOME/.oh-my-zsh
 mv $HOME/oh-my-zsh/* $HOME/.oh-my-zsh
 rsync -azP zsh/.zshrc $HOME/.zshrc
 
@@ -44,6 +48,3 @@ rsync -azP systemd $HOME/.config/
 
 # copy screenlayouts
 rsync -azP screenlayout/.screenlayout $HOME/
-
-# copy background updater
-sudo cp backgrounds/change_background.sh /usr/bin/change_background.sh

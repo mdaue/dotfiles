@@ -218,6 +218,7 @@ exec xcompmgr -c -f -n
 
 # Turn on Palm Sensitivity
 exec synclient PalmDetect=1
+exec synclient VertScrollDelta=100
 
 # Lock screen
 bindsym $mod+p exec i3lock -c '#000000'
