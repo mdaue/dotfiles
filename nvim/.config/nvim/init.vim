@@ -563,7 +563,7 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = "<leader>d"
 let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
+"let g:jedi#usages_command = "<leader>n"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
 let g:jedi#completions_command = "<C-Space>"
@@ -642,7 +642,7 @@ nmap <Leader>a <Plug>(EasyAlign)
 " Map CTRLPBuffer
 noremap <C-P> :CtrlP<CR>
 noremap <C-L> :CtrlPBuffer<CR>
-nnoremap <C-S> :CtrlPSSH<CR>
+nnoremap <leader>ssh :CtrlPSSH<CR>
 nnoremap <leader>. :CtrlPTag<cr>
 
 " Ctags / Tagbar
@@ -653,7 +653,7 @@ nnoremap <silent> <Leader>ctr :!ctags -R -f ./.git/tags .<CR>
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 
 " NERDTree
-map <C-n> :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 
 " Open my VIMRC
 nnoremap <leader>ev :vsplit ${MYVIMRC}<cr>
