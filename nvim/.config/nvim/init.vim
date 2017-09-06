@@ -652,9 +652,6 @@ nnoremap <silent> <Leader>ctr :!ctags -R -f ./.git/tags .<CR>
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 
-" NERDTree
-map <leader>n :NERDTreeToggle<CR>
-
 " Open my VIMRC
 nnoremap <leader>ev :vsplit ${MYVIMRC}<cr>
 nnoremap <leader>sv :source ${MYVIMRC}<cr>
