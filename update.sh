@@ -1,5 +1,16 @@
 #!/bin/bash
 
+if [[ -f /usr/bin/apt-get ]]; then
+    OS="deb"
+elif [[ -f /usr/bin/yum || -f /usr/bin/dnf ]]; then
+    OS="rpm"
+elif [[ -f /sbin/apk ]]; then
+    OS="apk"
+else
+    echo "Error determining package manager"
+    OS="UNKNOWN"
+fi
+
 # Installs the git files by rsynching them... call this after updating your repo
 # copy git
 rsync -azP git/.gitconfig $HOME/
@@ -48,3 +59,23 @@ rsync -azP systemd $HOME/.config/
 
 # copy screenlayouts
 rsync -azP screenlayout/.screenlayout $HOME/
+
+if [[ -z ~/.fzf ]]; then
+    pushd $HOME
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf install --all
+    popd
+fi
+
+# Install AG
+if [[ "$OS" == "deb" ]]; then sudo apt-get install silversearcher-ag; fi
+if [[ "$OS" == "rpm" ]]; then
+    sudo yum install -y pcre-devel
+    sudo yum install xz-devel
+    pushd /usr/local/src
+    sudo git clone https://github.com/ggreer/the_silver_searcher.git
+    cd the_silver_searcher
+    sudo ./build.sh
+    sudo make install
+    popd
+fi

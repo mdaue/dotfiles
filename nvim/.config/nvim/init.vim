@@ -27,10 +27,15 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "" Plug install packages
 "*****************************************************************************
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-"Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -38,22 +43,26 @@ Plug 'vim-scripts/CSApprox'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/syntastic'
-Plug 'Yggdroot/indentLine'
-Plug 'avelino/vim-bootstrap-updater'
+
+Plug 'w0rp/ale'
+"Plug 'scrooloose/syntastic'
+
 Plug 'easymotion/vim-easymotion'
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Custom Adds
 Plug 'Valloric/YouCompleteMe'
 Plug 'vim-scripts/ShowFunc.vim'
 Plug 'lilydjwg/colorizer'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/nerdcommenter'
-Plug 'vim-scripts/grep.vim'
-Plug 'vim-scripts/cscope.vim'
-Plug 'universal-ctags/ctags'
+"Plug 'terryma/vim-multiple-cursors'
+"Plug 'scrooloose/nerdcommenter'
+"Plug 'vim-scripts/grep.vim'
+"Plug 'vim-scripts/cscope.vim'
+"Plug 'universal-ctags/ctags'
+Plug 'jakedouglas/exuberant-ctags'
+Plug 'altercation/vim-colors-solarized'
 
 let g:make = 'gmake'
 if exists('make')
@@ -79,7 +88,7 @@ endif
 Plug 'honza/vim-snippets'
 
 "" Color
-Plug 'tomasr/molokai'
+"Plug 'tomasr/molokai'
 
 "*****************************************************************************
 "" Custom bundles
@@ -182,7 +191,7 @@ set number
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-  colorscheme molokai
+  colorscheme solarized
 endif
 
 set mousemodel=popup
@@ -203,11 +212,7 @@ else
   let g:indentLine_concealcursor = 0
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
-
-  
 endif
-
-
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -232,11 +237,12 @@ endif
 
 " vim-airline
 let g:airline_theme = 'powerlineish'
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#syntastic#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
+let g:airline#extensions#ale#enabled = 1
 
 "*****************************************************************************
 "" Abbreviations
@@ -362,24 +368,33 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 "" ctrlp.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
-let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-let g:ctrlp_use_caching = 1
+"set wildmode=list:longest,list:full
+"set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+"let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
+"let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
+"let g:ctrlp_use_caching = 1
+
+" fzf
+nmap \ :Buffers<CR>
+nmap <C-P> :Files<CR>
+nmap <C-R> :Tags<CR>
 
 " The Silver Searcher
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0
+  nmap <M-k>    :Ack! "\b<cword>\b" <CR>
+  nmap <Esc>k   :Ack! "\b<cword>\b" <CR>
+  nmap <M-S-k>  :Ggrep! "\b<cword>\b" <CR>
+  nmap <Esc>K   :Ggrep! "\b<cword>\b" <CR>
 endif
 
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-noremap <leader>b :CtrlPBuffer<CR>
-let g:ctrlp_map = '<leader>e'
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+"noremap <leader>b :CtrlPBuffer<CR>
+"let g:ctrlp_map = '<leader>e'
+"let g:ctrlp_open_new_file = 'r'
+"let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
 " snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -678,7 +693,7 @@ vnoremap <Space> zf
 nnoremap <leader>w :bd<cr>
 cmap w!! w !sudo tee > /dev/null %
 
-colorscheme molokai
+colorscheme solarized
 set mouse=a
 "set term=xterm
 set smartcase
@@ -702,7 +717,7 @@ if has("gui_running")
 endif
 
 " Enable deoplete at startup
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
 
 " Cscope bindings
 if has("cscope")
