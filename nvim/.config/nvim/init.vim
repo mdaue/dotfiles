@@ -377,9 +377,9 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 "let g:ctrlp_use_caching = 1
 
 " fzf
-nmap \ :Buffers<CR>
-nmap <C-P> :Files<CR>
-nmap <C-R> :Tags<CR>
+nmap \ :buffers<CR>
+nmap <C-P> :files<CR>
+nmap <C-R> :tags<CR>
 
 " The Silver Searcher
 if executable('ag')
