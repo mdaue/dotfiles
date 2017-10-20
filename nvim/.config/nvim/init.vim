@@ -587,7 +587,7 @@ let g:jedi#completions_command = "<C-Space>"
 let g:jedi#smart_auto_mappings = 0
 
 " syntastic
-let g:syntastic_python_checkers=['python', 'flake8']
+"let g:syntastic_python_checkers=['python', 'flake8']
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
@@ -668,6 +668,7 @@ nnoremap <silent> <Leader>ctr :!ctags -R -f ./.git/tags .<CR>
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_python_binary_path = 'python'
 
 " Open my VIMRC
 nnoremap <leader>ev :vsplit ${MYVIMRC}<cr>
