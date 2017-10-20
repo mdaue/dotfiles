@@ -62,7 +62,9 @@ Plug 'lilydjwg/colorizer'
 "Plug 'vim-scripts/cscope.vim'
 "Plug 'universal-ctags/ctags'
 Plug 'jakedouglas/exuberant-ctags'
-Plug 'altercation/vim-colors-solarized'
+
+Plug 'iCyMind/NeoSolarized'
+"Plug 'altercation/vim-colors-solarized'
 
 let g:make = 'gmake'
 if exists('make')
@@ -693,6 +695,7 @@ vnoremap <Space> zf
 nnoremap <leader>w :bd<cr>
 cmap w!! w !sudo tee > /dev/null %
 
+set termguicolors
 colorscheme solarized
 set mouse=a
 "set term=xterm
