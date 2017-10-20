@@ -67,11 +67,16 @@ if [[ -z ~/.fzf ]]; then
     popd
 fi
 
+# Install git
+if [[ -z /usr/bin/git ]]; then
+    if [[ "$OS" == "deb" ]]; then sudo apt-get install -y git; fi
+    if [[ "$OS" == "rpm" ]]; then sudo yum install -y git; fi
+fi
+
 # Install AG
-if [[ "$OS" == "deb" ]]; then sudo apt-get install silversearcher-ag; fi
+if [[ "$OS" == "deb" ]]; then sudo apt-get install -y silversearcher-ag; fi
 if [[ "$OS" == "rpm" ]]; then
-    sudo yum install -y pcre-devel
-    sudo yum install xz-devel
+    sudo yum install -y pcre-devel xz-devel
     pushd /usr/local/src
     sudo git clone https://github.com/ggreer/the_silver_searcher.git
     cd the_silver_searcher
@@ -79,3 +84,9 @@ if [[ "$OS" == "rpm" ]]; then
     sudo make install
     popd
 fi
+
+# Install tmux plugin manager
+if [[ ! -f ~/.tmux/plugins/tpm ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
