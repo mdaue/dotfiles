@@ -31,6 +31,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'tpope/vim-surround'
@@ -74,8 +75,8 @@ Plug 'Shougo/vimproc.vim', {'do': g:make}
 
 " session management
 Plug 'tpope/vim-obsession'
-Plug 'dhruvasagar/vim-prosession'
-Plug 'gikmx/ctrlp-obsession'
+"Plug 'dhruvasagar/vim-prosession'
+"Plug 'gikmx/ctrlp-obsession'
 
 if v:version >= 703
   Plug 'Shougo/vimshell.vim'
@@ -84,7 +85,7 @@ endif
 if v:version >= 704
   "" Snippets
   Plug 'SirVer/ultisnips'
-  Plug 'FelikZ/ctrlp-py-matcher'
+"  Plug 'FelikZ/ctrlp-py-matcher'
 endif
 
 Plug 'honza/vim-snippets'
@@ -377,9 +378,9 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 "let g:ctrlp_use_caching = 1
 
 " fzf
-nmap \ :buffers<CR>
-nmap <C-P> :files<CR>
-nmap <C-R> :tags<CR>
+nmap \ :Buffers<CR>
+nmap <C-P> :Files<CR>
+nmap <C-T> :Tags<CR>
 
 " The Silver Searcher
 if executable('ag')
@@ -657,10 +658,10 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
 " Map CTRLPBuffer
-noremap <C-P> :CtrlP<CR>
-noremap <C-L> :CtrlPBuffer<CR>
-nnoremap <leader>ssh :CtrlPSSH<CR>
-nnoremap <leader>. :CtrlPTag<cr>
+"noremap <C-P> :CtrlP<CR>
+"jnoremap <C-L> :CtrlPBuffer<CR>
+"nnoremap <leader>ssh :CtrlPSSH<CR>
+"nnoremap <leader>. :CtrlPTag<cr>
 
 " Ctags / Tagbar
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
