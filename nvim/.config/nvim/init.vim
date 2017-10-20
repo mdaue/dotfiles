@@ -75,7 +75,7 @@ Plug 'Shougo/vimproc.vim', {'do': g:make}
 
 " session management
 Plug 'tpope/vim-obsession'
-"Plug 'dhruvasagar/vim-prosession'
+Plug 'dhruvasagar/vim-prosession'
 "Plug 'gikmx/ctrlp-obsession'
 
 if v:version >= 703
