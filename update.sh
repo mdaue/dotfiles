@@ -63,9 +63,11 @@ rsync -azP screenlayout/.screenlayout $HOME/
 if [[ -z ~/.fzf ]]; then
     pushd $HOME
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf install --all
     popd
 fi
+
+# Run installer everytime since the zsh file is overwritten
+~/.fzf install --all
 
 # Install git
 if [[ -z /usr/bin/git ]]; then
