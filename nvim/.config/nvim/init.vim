@@ -193,7 +193,7 @@ set number
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-  colorscheme solarized
+  colorscheme NeoSolarized
 endif
 
 set mousemodel=popup
@@ -695,8 +695,11 @@ vnoremap <Space> zf
 nnoremap <leader>w :bd<cr>
 cmap w!! w !sudo tee > /dev/null %
 
+" NeoSolarized
 set termguicolors
-colorscheme solarized
+colorscheme NeoSolarized
+set background=dark
+
 set mouse=a
 "set term=xterm
 set smartcase
