@@ -67,7 +67,7 @@ if [[ -z ~/.fzf ]]; then
 fi
 
 # Run installer everytime since the zsh file is overwritten
-~/.fzf install --all
+~/.fzf/install --all
 
 # Install git
 if [[ -z /usr/bin/git ]]; then
