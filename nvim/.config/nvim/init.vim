@@ -27,10 +27,16 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "" Plug install packages
 "*****************************************************************************
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-"Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -38,22 +44,28 @@ Plug 'vim-scripts/CSApprox'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/syntastic'
-Plug 'Yggdroot/indentLine'
-Plug 'avelino/vim-bootstrap-updater'
+
+Plug 'w0rp/ale'
+"Plug 'scrooloose/syntastic'
+
 Plug 'easymotion/vim-easymotion'
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Custom Adds
 Plug 'Valloric/YouCompleteMe'
 Plug 'vim-scripts/ShowFunc.vim'
 Plug 'lilydjwg/colorizer'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/nerdcommenter'
-Plug 'vim-scripts/grep.vim'
-Plug 'vim-scripts/cscope.vim'
-Plug 'universal-ctags/ctags'
+"Plug 'terryma/vim-multiple-cursors'
+"Plug 'scrooloose/nerdcommenter'
+"Plug 'vim-scripts/grep.vim'
+"Plug 'vim-scripts/cscope.vim'
+"Plug 'universal-ctags/ctags'
+Plug 'jakedouglas/exuberant-ctags'
+
+Plug 'iCyMind/NeoSolarized'
+"Plug 'altercation/vim-colors-solarized'
 
 let g:make = 'gmake'
 if exists('make')
@@ -64,7 +76,7 @@ Plug 'Shougo/vimproc.vim', {'do': g:make}
 " session management
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
-Plug 'gikmx/ctrlp-obsession'
+"Plug 'gikmx/ctrlp-obsession'
 
 if v:version >= 703
   Plug 'Shougo/vimshell.vim'
@@ -73,13 +85,13 @@ endif
 if v:version >= 704
   "" Snippets
   Plug 'SirVer/ultisnips'
-  Plug 'FelikZ/ctrlp-py-matcher'
+"  Plug 'FelikZ/ctrlp-py-matcher'
 endif
 
 Plug 'honza/vim-snippets'
 
 "" Color
-Plug 'tomasr/molokai'
+"Plug 'tomasr/molokai'
 
 "*****************************************************************************
 "" Custom bundles
@@ -182,7 +194,7 @@ set number
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-  colorscheme molokai
+  colorscheme NeoSolarized
 endif
 
 set mousemodel=popup
@@ -203,11 +215,7 @@ else
   let g:indentLine_concealcursor = 0
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
-
-  
 endif
-
-
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -232,11 +240,12 @@ endif
 
 " vim-airline
 let g:airline_theme = 'powerlineish'
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#syntastic#enabled = 0
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
+let g:airline#extensions#ale#enabled = 1
 
 "*****************************************************************************
 "" Abbreviations
@@ -362,24 +371,33 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 "" ctrlp.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
-let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-let g:ctrlp_use_caching = 1
+"set wildmode=list:longest,list:full
+"set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+"let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
+"let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
+"let g:ctrlp_use_caching = 1
+
+" fzf
+nmap \ :Buffers<CR>
+nmap <C-P> :Files<CR>
+nmap <C-T> :Tags<CR>
 
 " The Silver Searcher
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0
+  nmap <M-k>    :Ack! "\b<cword>\b" <CR>
+  nmap <Esc>k   :Ack! "\b<cword>\b" <CR>
+  nmap <M-S-k>  :Ggrep! "\b<cword>\b" <CR>
+  nmap <Esc>K   :Ggrep! "\b<cword>\b" <CR>
 endif
 
 cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-noremap <leader>b :CtrlPBuffer<CR>
-let g:ctrlp_map = '<leader>e'
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+"noremap <leader>b :CtrlPBuffer<CR>
+"let g:ctrlp_map = '<leader>e'
+"let g:ctrlp_open_new_file = 'r'
+"let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
 " snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -570,7 +588,7 @@ let g:jedi#completions_command = "<C-Space>"
 let g:jedi#smart_auto_mappings = 0
 
 " syntastic
-let g:syntastic_python_checkers=['python', 'flake8']
+"let g:syntastic_python_checkers=['python', 'flake8']
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
@@ -640,10 +658,10 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
 " Map CTRLPBuffer
-noremap <C-P> :CtrlP<CR>
-noremap <C-L> :CtrlPBuffer<CR>
-nnoremap <leader>ssh :CtrlPSSH<CR>
-nnoremap <leader>. :CtrlPTag<cr>
+"noremap <C-P> :CtrlP<CR>
+"jnoremap <C-L> :CtrlPBuffer<CR>
+"nnoremap <leader>ssh :CtrlPSSH<CR>
+"nnoremap <leader>. :CtrlPTag<cr>
 
 " Ctags / Tagbar
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
@@ -651,6 +669,7 @@ nnoremap <silent> <Leader>ctr :!ctags -R -f ./.git/tags .<CR>
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_python_binary_path = 'python'
 
 " Open my VIMRC
 nnoremap <leader>ev :vsplit ${MYVIMRC}<cr>
@@ -678,7 +697,30 @@ vnoremap <Space> zf
 nnoremap <leader>w :bd<cr>
 cmap w!! w !sudo tee > /dev/null %
 
-colorscheme molokai
+" NeoSolarized
+set termguicolors
+colorscheme NeoSolarized
+set background=dark
+" default value is "normal", Setting this option to "high" or "low" does use the 
+" same Solarized palette but simply shifts some values up or down in order to 
+" expand or compress the tonal range displayed.
+let g:neosolarized_contrast = "normal"
+
+" Special characters such as trailing whitespace, tabs, newlines, when displayed 
+" using ":set list" can be set to one of three levels depending on your needs. 
+" Default value is "normal". Provide "high" and "low" options.
+let g:neosolarized_visibility = "normal"
+
+" I make vertSplitBar a transparent background color. If you like the origin solarized vertSplitBar
+" style more, set this value to 0.
+let g:neosolarized_vertSplitBgTrans = 1
+
+" If you wish to enable/disable NeoSolarized from displaying bold, underlined or italicized 
+" typefaces, simply assign 1 or 0 to the appropriate variable. Default values:  
+let g:neosolarized_bold = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_italic = 0
+
 set mouse=a
 "set term=xterm
 set smartcase
@@ -702,7 +744,7 @@ if has("gui_running")
 endif
 
 " Enable deoplete at startup
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
 
 " Cscope bindings
 if has("cscope")

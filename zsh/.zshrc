@@ -91,3 +91,21 @@ alias vrun='valgrind --leak-check=full --track-origins=yes'
 alias keys='ssh-add ~/.ssh/id_home; ssh-add ~/.ssh/id_carbyne; ssh-add ~/.ssh/git_carbyne'
 alias rdp='rdesktop -g1300x800'
 alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >/dev/null 2>&1 &'
+
+# fzf via local installation
+if [ -e ~/.fzf ]; then
+  PATH=$PATH:~/.fzf/bin
+  source ~/.fzf/shell/key-bindings.zsh
+  source ~/.fzf/shell/completion.zsh
+fi
+
+# fzf + ag configuration
+if [[ ! -z $(command -v fzf) && ! -z $(command -v ag) ]]; then
+  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS='
+  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+  '
+fi
