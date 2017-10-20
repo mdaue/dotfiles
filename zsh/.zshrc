@@ -94,13 +94,13 @@ alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >
 
 # fzf via local installation
 if [ -e ~/.fzf ]; then
-  _append_to_path ~/.fzf/bin
+  PATH=$PATH:~/.fzf/bin
   source ~/.fzf/shell/key-bindings.zsh
   source ~/.fzf/shell/completion.zsh
 fi
 
 # fzf + ag configuration
-if _has fzf && _has ag; then
+if [[ ! -z $(command -v fzf) && ! -z $(command -v ag) ]]; then
   export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
