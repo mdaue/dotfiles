@@ -25,6 +25,15 @@ else
     OS="UNKNOWN"
 fi
 
+# Install NVIM
+if [[ -z $(which nvim) ]]; then
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt-get update
+    sudo apt-get install -y neovim python-dev python-pip python3-dev python3-pip
+    sudo apt-get install
+fi
+nvim +PluginUpdate +qall
+
 # Installs the git files by rsynching them... call this after updating your repo
 # copy git
 rsync -azP git/.gitconfig $HOME/
@@ -46,6 +55,8 @@ vim +PluginInstall +qall
 
 # copy nvim
 rsync -azP nvim/.config $HOME/
+# Force a resync of the plugins
+rm -rf $HOME/.config/nvim/plugged
 
 # copy fish
 if [ ! -d "$HOME/.config/fish" ]
