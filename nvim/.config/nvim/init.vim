@@ -39,7 +39,7 @@ Plug 'tpope/vim-repeat'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter' (broken)
 Plug 'vim-scripts/CSApprox'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Raimondi/delimitMate'
