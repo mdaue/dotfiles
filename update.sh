@@ -1,5 +1,19 @@
 #!/bin/bash
 
+function update
+{
+    if [[ -z "$1" ]]; then
+        return
+    fi
+    if [[ -f /usr/bin/git ]]; then
+        echo "Updating repository in $1"
+        pushd $1
+        git pull origin master --quiet
+        git submodule update --recursive --quiet
+        popd
+    fi
+}
+
 if [[ -f /usr/bin/apt-get ]]; then
     OS="deb"
 elif [[ -f /usr/bin/yum || -f /usr/bin/dnf ]]; then
@@ -10,6 +24,15 @@ else
     echo "Error determining package manager"
     OS="UNKNOWN"
 fi
+
+# Install NVIM
+if [[ -z $(which nvim) ]]; then
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt-get update
+    sudo apt-get install -y neovim python-dev python-pip python3-dev python3-pip
+    sudo apt-get install
+fi
+nvim +PluginUpdate +qall
 
 # Installs the git files by rsynching them... call this after updating your repo
 # copy git
@@ -32,6 +55,8 @@ vim +PluginInstall +qall
 
 # copy nvim
 rsync -azP nvim/.config $HOME/
+# Force a resync of the plugins
+rm -rf $HOME/.config/nvim/plugged
 
 # copy fish
 if [ ! -d "$HOME/.config/fish" ]
@@ -49,9 +74,12 @@ sudo cp i3/i3lock.service /etc/systemd/system/
 sudo systemctl enable i3lock.service
 
 # copy zsh stuff
-rsync -azP zsh/oh-my-zsh $HOME/
-mkdir $HOME/.oh-my-zsh
-mv $HOME/oh-my-zsh/* $HOME/.oh-my-zsh
+if [[ ! -d $HOME/.oh-my-zsh ]]; then
+    git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+else
+    update $HOME/.oh-my-zsh
+fi
+
 rsync -azP zsh/.zshrc $HOME/.zshrc
 
 # copy systemd scripts
@@ -60,17 +88,19 @@ rsync -azP systemd $HOME/.config/
 # copy screenlayouts
 rsync -azP screenlayout/.screenlayout $HOME/
 
-if [[ -z ~/.fzf ]]; then
+if [[ ! -d ~/.fzf ]]; then
     pushd $HOME
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
     popd
+else
+    update $HOME/.fzf
 fi
 
 # Run installer everytime since the zsh file is overwritten
 ~/.fzf/install --all
 
 # Install git
-if [[ -z /usr/bin/git ]]; then
+if [[ ! -f /usr/bin/git ]]; then
     if [[ "$OS" == "deb" ]]; then sudo apt-get install -y git; fi
     if [[ "$OS" == "rpm" ]]; then sudo yum install -y git; fi
 fi
@@ -80,7 +110,11 @@ if [[ "$OS" == "deb" ]]; then sudo apt-get install -y silversearcher-ag; fi
 if [[ "$OS" == "rpm" ]]; then
     sudo yum install -y pcre-devel xz-devel
     pushd /usr/local/src
-    sudo git clone https://github.com/ggreer/the_silver_searcher.git
+    if [[ ! -d /usr/local/src/the_silver_searcher ]]; then
+        sudo git clone https://github.com/ggreer/the_silver_searcher.git
+    else
+        update /usr/local/src/the_silver_searcher
+    fi
     cd the_silver_searcher
     sudo ./build.sh
     sudo make install
@@ -88,7 +122,9 @@ if [[ "$OS" == "rpm" ]]; then
 fi
 
 # Install tmux plugin manager
-if [[ ! -f ~/.tmux/plugins/tpm ]]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+    git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+else
+    update $HOME/.tmux/plugins/tpm
 fi
 

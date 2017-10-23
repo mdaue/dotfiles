@@ -39,7 +39,7 @@ Plug 'tpope/vim-repeat'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter' (broken)
 Plug 'vim-scripts/CSApprox'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Raimondi/delimitMate'
@@ -54,7 +54,7 @@ Plug 'sheerun/vim-polyglot'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Custom Adds
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'vim-scripts/ShowFunc.vim'
 Plug 'lilydjwg/colorizer'
 "Plug 'terryma/vim-multiple-cursors'
