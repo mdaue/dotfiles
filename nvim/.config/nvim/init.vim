@@ -54,7 +54,7 @@ Plug 'sheerun/vim-polyglot'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Custom Adds
-Plug 'mileszs/ack.vim.git'
+Plug 'mileszs/ack.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'vim-scripts/ShowFunc.vim'
 Plug 'lilydjwg/colorizer'
