@@ -10,3 +10,4 @@ set -x EDITOR vim
 
 # Run SSH agent
 set_ssh_agent_socket
+eval (python -m virtualfish)

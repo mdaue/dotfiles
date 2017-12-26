@@ -64,6 +64,15 @@ then
     mkdir -p "$HOME/.config/fish"
 fi
 
+# Install virtualfish
+PIP2=$(which pip2)
+PIP3=$(which pip3)
+
+if [ -z ${PIP2+x} ]; then pip2 install --upgrade virtualfish; fi
+if [ -z ${PIP3+x} ]; then pip3 install --upgrade virtualfish; fi
+
+echo "If using FISH, see http://virtualfish.readthedocs.io/en/latest/install.html#customizing-your-fish-prompt to customize your FISH prompt for virtualenvwrapper"
+
 rsync -azP fish/config.fish $HOME/.config/fish/
 rsync -azP fish/functions $HOME/.config/fish/
 rsync -azP fish/fishd "$HOME/.config/fish/fishd.`hostname`"
