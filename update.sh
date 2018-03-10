@@ -26,11 +26,13 @@ else
 fi
 
 # Install NVIM
-if [[ -z $(which nvim) ]]; then
+if [[ -z $(which nvim) && "$OS" == "deb" ]]; then
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get update
-    sudo apt-get install -y neovim python-dev python-pip python3-dev python3-pip
+    sudo apt-get install -y neovim python-dev python-pip python3-dev python3-pip ctags
     sudo apt-get install
+else
+    echo "Must install neovim and ctags manually"
 fi
 nvim +PluginUpdate +qall
 
