@@ -26,11 +26,13 @@ else
 fi
 
 # Install NVIM
-if [[ -z $(which nvim) ]]; then
+if [[ -z $(which nvim) && "$OS" == "deb" ]]; then
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get update
-    sudo apt-get install -y neovim python-dev python-pip python3-dev python3-pip
+    sudo apt-get install -y neovim python-dev python-pip python3-dev python3-pip ctags
     sudo apt-get install
+else
+    echo "Must install neovim and ctags manually"
 fi
 nvim +PluginUpdate +qall
 
@@ -63,6 +65,15 @@ if [ ! -d "$HOME/.config/fish" ]
 then
     mkdir -p "$HOME/.config/fish"
 fi
+
+# Install virtualfish
+PIP2=$(which pip2)
+PIP3=$(which pip3)
+
+if [ -z ${PIP2+x} ]; then pip2 install --upgrade virtualfish; fi
+if [ -z ${PIP3+x} ]; then pip3 install --upgrade virtualfish; fi
+
+echo "If using FISH, see http://virtualfish.readthedocs.io/en/latest/install.html#customizing-your-fish-prompt to customize your FISH prompt for virtualenvwrapper"
 
 rsync -azP fish/config.fish $HOME/.config/fish/
 rsync -azP fish/functions $HOME/.config/fish/
