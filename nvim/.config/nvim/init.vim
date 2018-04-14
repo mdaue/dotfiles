@@ -84,7 +84,7 @@ endif
 
 if v:version >= 704
   "" Snippets
-  Plug 'SirVer/ultisnips'
+  "Plug 'SirVer/ultisnips'
 "  Plug 'FelikZ/ctrlp-py-matcher'
 endif
 

@@ -6,6 +6,7 @@ export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 export WINEARCH=win32
 export WINEPREFIX=$HOME/.win32
+export GPGKEY=1AB7B0F8
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -55,7 +56,8 @@ plugins=(git archlinux autojump autopep8 battery chucknorris colorize colored-ma
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$(go env GOPATH)/bin:$PATH
+export GOPATH=$(go env GOPATH)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
