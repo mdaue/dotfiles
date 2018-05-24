@@ -127,6 +127,9 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/indentpython.vim'
 
+" Save eyes
+Plug 'soywod/vim-keepeye'
+
 "*****************************************************************************
 "*****************************************************************************
 
@@ -261,6 +264,9 @@ endif
 " Theme
 syntax enable
 colorscheme OceanicNext
+
+" Auto start save eyes
+let g:keepeye_autostart = 0 | 1
 
 "*****************************************************************************
 "" Abbreviations
