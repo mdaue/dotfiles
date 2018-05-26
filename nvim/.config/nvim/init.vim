@@ -30,7 +30,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
-Plug 'tmhedberg/matchit.git'
+Plug 'tmhedberg/matchit'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -65,7 +65,7 @@ Plug 'lilydjwg/colorizer'
 "Plug 'vim-scripts/grep.vim'
 "Plug 'vim-scripts/cscope.vim'
 "Plug 'universal-ctags/ctags'
-Plug 'jakedouglas/exuberant-ctags'
+Plug 'xolox/vim-easytags'
 
 Plug 'mhartington/oceanic-next'
 "Plug 'iCyMind/NeoSolarized'
