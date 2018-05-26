@@ -66,6 +66,7 @@ Plug 'lilydjwg/colorizer'
 "Plug 'vim-scripts/cscope.vim'
 "Plug 'universal-ctags/ctags'
 Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
 
 Plug 'mhartington/oceanic-next'
 "Plug 'iCyMind/NeoSolarized'
