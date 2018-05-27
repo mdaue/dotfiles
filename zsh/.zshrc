@@ -93,6 +93,7 @@ alias vrun='valgrind --leak-check=full --track-origins=yes'
 alias keys='ssh-add ~/.ssh/id_home; ssh-add ~/.ssh/id_carbyne; ssh-add ~/.ssh/git_carbyne'
 alias rdp='rdesktop -g1300x800'
 alias steam-wine='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >/dev/null 2>&1 &'
+alias npm-do='export PATH=$PATH:$(npm bin)'
 
 # fzf via local installation
 if [ -e ~/.fzf ]; then
