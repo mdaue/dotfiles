@@ -70,8 +70,8 @@ fi
 PIP2=$(which pip2)
 PIP3=$(which pip3)
 
-if [ -z ${PIP2+x} ]; then pip2 install --upgrade virtualfish; fi
-if [ -z ${PIP3+x} ]; then pip3 install --upgrade virtualfish; fi
+if [ -z ${PIP2+x} ]; then pip2 install --upgrade virtualfish thefuck neovim; fi
+if [ -z ${PIP3+x} ]; then pip3 install --upgrade virtualfish thefuck neovim; fi
 
 echo "If using FISH, see http://virtualfish.readthedocs.io/en/latest/install.html#customizing-your-fish-prompt to customize your FISH prompt for virtualenvwrapper"
 
