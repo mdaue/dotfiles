@@ -30,6 +30,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
+Plug 'tmhedberg/matchit'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
@@ -63,9 +65,11 @@ Plug 'lilydjwg/colorizer'
 "Plug 'vim-scripts/grep.vim'
 "Plug 'vim-scripts/cscope.vim'
 "Plug 'universal-ctags/ctags'
-Plug 'jakedouglas/exuberant-ctags'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
 
-Plug 'iCyMind/NeoSolarized'
+Plug 'mhartington/oceanic-next'
+"Plug 'iCyMind/NeoSolarized'
 "Plug 'altercation/vim-colors-solarized'
 
 let g:make = 'gmake'
@@ -125,6 +129,9 @@ Plug 'jelera/vim-javascript-syntax'
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/indentpython.vim'
+
+" Save eyes
+Plug 'soywod/vim-keepeye'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -193,10 +200,10 @@ syntax on
 set ruler
 set number
 
-let no_buffers_menu=1
-if !exists('g:not_finish_vimplug')
-  colorscheme NeoSolarized
-endif
+" let no_buffers_menu=1
+" if !exists('g:not_finish_vimplug')
+"   colorscheme NeoSolarized
+" endif
 
 set mousemodel=popup
 set t_Co=256
@@ -247,6 +254,22 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#ale#enabled = 1
+
+" oceanic-next colorscheme
+" For Neovim 0.1.3 and 0.1.4
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+" Or if you have Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" Theme
+syntax enable
+colorscheme OceanicNext
+
+" Auto start save eyes
+let g:keepeye_autostart = 0 | 1
 
 "*****************************************************************************
 "" Abbreviations
@@ -698,29 +721,29 @@ vnoremap <Space> zf
 nnoremap <leader>w :bd<cr>
 cmap w!! w !sudo tee > /dev/null %
 
-" NeoSolarized
-set termguicolors
-colorscheme NeoSolarized
-set background=dark
-" default value is "normal", Setting this option to "high" or "low" does use the 
-" same Solarized palette but simply shifts some values up or down in order to 
-" expand or compress the tonal range displayed.
-let g:neosolarized_contrast = "normal"
+" " NeoSolarized
+" set termguicolors
+" colorscheme NeoSolarized
+" set background=dark
+" " default value is "normal", Setting this option to "high" or "low" does use the 
+" " same Solarized palette but simply shifts some values up or down in order to 
+" " expand or compress the tonal range displayed.
+" let g:neosolarized_contrast = "normal"
 
-" Special characters such as trailing whitespace, tabs, newlines, when displayed 
-" using ":set list" can be set to one of three levels depending on your needs. 
-" Default value is "normal". Provide "high" and "low" options.
-let g:neosolarized_visibility = "normal"
+" " Special characters such as trailing whitespace, tabs, newlines, when displayed 
+" " using ":set list" can be set to one of three levels depending on your needs. 
+" " Default value is "normal". Provide "high" and "low" options.
+" let g:neosolarized_visibility = "normal"
 
-" I make vertSplitBar a transparent background color. If you like the origin solarized vertSplitBar
-" style more, set this value to 0.
-let g:neosolarized_vertSplitBgTrans = 1
+" " I make vertSplitBar a transparent background color. If you like the origin solarized vertSplitBar
+" " style more, set this value to 0.
+" let g:neosolarized_vertSplitBgTrans = 1
 
-" If you wish to enable/disable NeoSolarized from displaying bold, underlined or italicized 
-" typefaces, simply assign 1 or 0 to the appropriate variable. Default values:  
-let g:neosolarized_bold = 1
-let g:neosolarized_underline = 1
-let g:neosolarized_italic = 0
+" " If you wish to enable/disable NeoSolarized from displaying bold, underlined or italicized 
+" " typefaces, simply assign 1 or 0 to the appropriate variable. Default values:  
+" let g:neosolarized_bold = 1
+" let g:neosolarized_underline = 1
+" let g:neosolarized_italic = 0
 
 set mouse=a
 "set term=xterm
