@@ -267,7 +267,7 @@ endif
 
 " Theme
 syntax enable
-colorscheme OceanicNext
+colorscheme vimterial_dark
 
 " Auto start save eyes
 let g:keepeye_autostart = 0 | 1
