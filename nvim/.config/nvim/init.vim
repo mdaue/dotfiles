@@ -69,6 +69,7 @@ Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 
 Plug 'mhartington/oceanic-next'
+Plug 'larsbs/vimterial_dark'
 "Plug 'iCyMind/NeoSolarized'
 "Plug 'altercation/vim-colors-solarized'
 
