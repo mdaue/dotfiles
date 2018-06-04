@@ -66,9 +66,10 @@
   prrsm = pull --recurse-submodules --rebase
   pom = push origin master
   pum = push upstream master
+   rt = !git tag -l | xargs git tag -d && git fetch -t
   subcm = submodule foreach git checkout master
   subprom = submodule foreach git pull --rebase origin master
-  subrh = submodule foreach git reset --hard 
+  subrh = submodule foreach git reset --hard
   subpull = submodule foreach "(git checkout master && git pull origin master)"
   subinit = submodule update --init --recursive
   subup = submodule update
@@ -117,6 +118,7 @@
   svnr = svn rebase
   svnd = svn dcommit
   svnl = svn log --oneline --show-commit
+    if = update-index --assume-unchanged
 [format]
   pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 [mergetool]
