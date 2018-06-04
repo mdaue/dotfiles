@@ -30,6 +30,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
+Plug 'tmhedberg/matchit'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
@@ -63,9 +65,11 @@ Plug 'lilydjwg/colorizer'
 "Plug 'vim-scripts/grep.vim'
 "Plug 'vim-scripts/cscope.vim'
 "Plug 'universal-ctags/ctags'
-Plug 'jakedouglas/exuberant-ctags'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
 
 Plug 'mhartington/oceanic-next'
+Plug 'larsbs/vimterial_dark'
 "Plug 'iCyMind/NeoSolarized'
 "Plug 'altercation/vim-colors-solarized'
 
@@ -263,7 +267,7 @@ endif
 
 " Theme
 syntax enable
-colorscheme OceanicNext
+colorscheme vimterial_dark
 
 " Auto start save eyes
 let g:keepeye_autostart = 0 | 1
