@@ -30,6 +30,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
+Plug 'jeetsukumaran/vim-pythonsense'
+
 Plug 'tmhedberg/matchit'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
