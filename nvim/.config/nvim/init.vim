@@ -185,6 +185,7 @@ let g:session_command_aliases = 1
 
 " easy tags
 let g:easytags_auto_update = 0
+let g:easytags_autorecurse = 1
 
 "*****************************************************************************
 "" Visual Settings
