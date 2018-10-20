@@ -72,7 +72,7 @@
   subrh = submodule foreach git reset --hard
   subpull = submodule foreach "(git checkout master && git pull origin master)"
   subinit = submodule update --init --recursive
-  subup = submodule update
+  subup = submodule update --recursive --remote
   cam = commit -am
   cm = commit -m
   co = checkout
