@@ -30,48 +30,38 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
+Plug 'jeetsukumaran/vim-pythonsense'
+
 Plug 'tmhedberg/matchit'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'airblade/vim-gitgutter' (broken)
 Plug 'vim-scripts/CSApprox'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 
 Plug 'w0rp/ale'
-"Plug 'scrooloose/syntastic'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'sheerun/vim-polyglot'
-
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Custom Adds
 Plug 'mileszs/ack.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'vim-scripts/ShowFunc.vim'
 Plug 'lilydjwg/colorizer'
-"Plug 'terryma/vim-multiple-cursors'
-"Plug 'scrooloose/nerdcommenter'
-"Plug 'vim-scripts/grep.vim'
-"Plug 'vim-scripts/cscope.vim'
-"Plug 'universal-ctags/ctags'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 
 Plug 'mhartington/oceanic-next'
 Plug 'larsbs/vimterial_dark'
-"Plug 'iCyMind/NeoSolarized'
-"Plug 'altercation/vim-colors-solarized'
 
 let g:make = 'gmake'
 if exists('make')
@@ -82,7 +72,6 @@ Plug 'Shougo/vimproc.vim', {'do': g:make}
 " session management
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
-"Plug 'gikmx/ctrlp-obsession'
 
 if v:version >= 703
   Plug 'Shougo/vimshell.vim'
@@ -193,6 +182,11 @@ let g:session_directory = "~/.config/nvim/session"
 let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
+
+" easy tags
+let g:easytags_auto_update = 0
+let g:easytags_autorecurse = 1
+let g:easytags_suppress_report = 1
 
 "*****************************************************************************
 "" Visual Settings
