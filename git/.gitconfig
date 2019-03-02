@@ -74,6 +74,7 @@
   subinit = submodule update --init --recursive
   subup = submodule update --recursive --remote
   cam = commit -am
+  casm = commit -asm
   cm = commit -m
   co = checkout
   fom = fetch origin master
