@@ -87,8 +87,10 @@ sudo systemctl enable i3lock.service
 # copy zsh stuff
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
     git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 else
     update $HOME/.oh-my-zsh
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
 rsync -azP zsh/.zshrc $HOME/.zshrc

@@ -52,7 +52,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux autojump autopep8 battery chucknorris colorize colored-man common-aliases django docker git git-extras git-flow history-substring-search python ssh-agent sudo systemd themes )
+plugins=(git autojump battery chucknorris colorize common-aliases docker git git-extras git-flow history-substring-search python ssh-agent sudo systemd themes zsh-autosuggestions)
 
 # User configuration
 

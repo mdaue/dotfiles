@@ -26,11 +26,10 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
+Plug 'larsbs/vimterial_dark'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-
-Plug 'jeetsukumaran/vim-pythonsense'
 
 Plug 'tmhedberg/matchit'
 
@@ -42,32 +41,22 @@ Plug 'tpope/vim-repeat'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/CSApprox'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
-
-Plug 'w0rp/ale'
 
 Plug 'easymotion/vim-easymotion'
 Plug 'sheerun/vim-polyglot'
 
 " Custom Adds
 Plug 'mileszs/ack.vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-Plug 'vim-scripts/ShowFunc.vim'
 Plug 'lilydjwg/colorizer'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-
-Plug 'mhartington/oceanic-next'
-Plug 'larsbs/vimterial_dark'
 
 let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
 endif
-Plug 'Shougo/vimproc.vim', {'do': g:make}
 
 " session management
 Plug 'tpope/vim-obsession'
@@ -83,8 +72,6 @@ if v:version >= 704
 "  Plug 'FelikZ/ctrlp-py-matcher'
 endif
 
-Plug 'honza/vim-snippets'
-
 "" Color
 "Plug 'tomasr/molokai'
 
@@ -95,11 +82,6 @@ Plug 'honza/vim-snippets'
 " c
 Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 Plug 'ludwig/split-manpage.vim'
-
-
-" go
-"" Go Lang Bundle
-Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
 
 " html
@@ -119,9 +101,6 @@ Plug 'jelera/vim-javascript-syntax'
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/indentpython.vim'
-
-" Save eyes
-Plug 'soywod/vim-keepeye'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -494,49 +473,6 @@ nnoremap <Leader>o :.Gbrowse<CR>
 " c
 autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
-
-
-" go
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [  'p:package', 'i:imports:1', 'c:constants', 'v:variables',
-        \ 't:types',  'n:interfaces', 'w:fields', 'e:embedded', 'm:methods',
-        \ 'r:constructor', 'f:functions' ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : { 't' : 'ctype', 'n' : 'ntype' },
-    \ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
-
-" vim-go
-" run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#cmd#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
-let g:go_list_type = "quickfix"
-let g:go_fmt_command = "goimports"
-let g:go_fmt_fail_silently = 1
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_space_tab_error = 0
-let g:go_highlight_array_whitespace_error = 0
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_extra_types = 0
 
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
