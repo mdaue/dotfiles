@@ -60,9 +60,7 @@ endif
 "*****************************************************************************
 
 " Schemes
-Plug 'larsbs/vimterial_dark'
 Plug 'altercation/vim-colors-solarized'
-Plug 'icymind/neosolarized'
 
 " Miscellaneous
 Plug 'bronson/vim-trailing-whitespace'
@@ -87,7 +85,6 @@ Plug 'ludwig/split-manpage.vim'
 
 " html
 "" HTML Bundle
-Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
@@ -185,10 +182,7 @@ syntax on
 set ruler
 set number
 
-" let no_buffers_menu=1
-" if !exists('g:not_finish_vimplug')
-"   colorscheme NeoSolarized
-" endif
+let no_buffers_menu=1
 
 set mousemodel=popup
 set t_Co=256
@@ -209,6 +203,13 @@ else
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
 endif
+
+"" Scheme Configuration
+syntax enable
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -629,30 +630,6 @@ endif
 
 " END VIM BOOTSTRAP: vim-bootstrap.com
 
-
-" " NeoSolarized
-set termguicolors
-colorscheme NeoSolarized
-set background=dark
-" default value is "normal", Setting this option to "high" or "low" does use the 
-" same Solarized palette but simply shifts some values up or down in order to 
-" expand or compress the tonal range displayed.
-let g:neosolarized_contrast = "normal"
-
-" Special characters such as trailing whitespace, tabs, newlines, when displayed 
-" using ":set list" can be set to one of three levels depending on your needs. 
-" Default value is "normal". Provide "high" and "low" options.
-let g:neosolarized_visibility = "normal"
-
-" I make vertSplitBar a transparent background color. If you like the origin solarized vertSplitBar
-" style more, set this value to 0.
-let g:neosolarized_vertSplitBgTrans = 1
-
-" If you wish to enable/disable NeoSolarized from displaying bold, underlined or italicized 
-" typefaces, simply assign 1 or 0 to the appropriate variable. Default values:  
-let g:neosolarized_bold = 1
-let g:neosolarized_underline = 1
-let g:neosolarized_italic = 0
 
 set mouse=a
 "set term=xterm
