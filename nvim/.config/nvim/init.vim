@@ -8,7 +8,7 @@ endif
 
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "c,go,html,javascript,python"
+let g:vim_bootstrap_langs = "c,go,html,javascript,python,rust,typescript"
 let g:vim_bootstrap_editor = "nvim"             " nvim or vim
 
 if !filereadable(vimplug_exists)
@@ -26,63 +26,64 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
-Plug 'larsbs/vimterial_dark'
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-
-Plug 'tmhedberg/matchit'
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/grep.vim'
+Plug 'vim-scripts/CSApprox'
+Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
-
-Plug 'easymotion/vim-easymotion'
+Plug 'w0rp/ale'
+Plug 'Yggdroot/indentLine'
+Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
 
-" Custom Adds
-Plug 'mileszs/ack.vim'
-Plug 'lilydjwg/colorizer'
-Plug 'xolox/vim-easytags'
-Plug 'xolox/vim-misc'
+if isdirectory('/usr/local/opt/fzf')
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+else
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf.vim'
+endif
 
 let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
 endif
 
-" session management
-Plug 'tpope/vim-obsession'
-Plug 'dhruvasagar/vim-prosession'
-
-if v:version >= 703
-  Plug 'Shougo/vimshell.vim'
-endif
-
-if v:version >= 704
-  "" Snippets
-  "Plug 'SirVer/ultisnips'
-"  Plug 'FelikZ/ctrlp-py-matcher'
-endif
-
-"" Color
-"Plug 'tomasr/molokai'
-
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
 
+" Schemes
+Plug 'larsbs/vimterial_dark'
+Plug 'altercation/vim-colors-solarized'
+Plug 'icymind/neosolarized'
+
+" Miscellaneous
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'easymotion/vim-easymotion'
+Plug 'lilydjwg/colorizer'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/syntastic'
+Plug 'tmhedberg/matchit'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'valloric/youcompleteme'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+
+" session management
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
+
 " c
 Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 Plug 'ludwig/split-manpage.vim'
-
 
 " html
 "" HTML Bundle
@@ -91,16 +92,26 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
-
 " javascript
 "" Javascript Bundle
 Plug 'jelera/vim-javascript-syntax'
-
 
 " python
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/indentpython.vim'
+Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+
+" rust
+" Vim racer
+Plug 'racer-rust/vim-racer'
+
+" Rust.vim
+Plug 'rust-lang/rust.vim'
+
+" typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -229,19 +240,6 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#ale#enabled = 1
 
-" oceanic-next colorscheme
-" For Neovim 0.1.3 and 0.1.4
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-" Or if you have Neovim >= 0.1.5
-if (has("termguicolors"))
- set termguicolors
-endif
-
-" Theme
-syntax enable
-colorscheme vimterial_dark
-
 " Auto start save eyes
 let g:keepeye_autostart = 0 | 1
 
@@ -368,12 +366,12 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 "" Opens a tab edit command with the path of the currently edited file filled
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
-"" ctrlp.vim
-"set wildmode=list:longest,list:full
-"set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-"let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
-"let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-"let g:ctrlp_use_caching = 1
+" ctrlp.vim
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
+let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
+let g:ctrlp_use_caching = 1
 
 " fzf
 nmap \ :Buffers<CR>
@@ -396,12 +394,6 @@ cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 "let g:ctrlp_map = '<leader>e'
 "let g:ctrlp_open_new_file = 'r'
 "let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-
-" snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsEditSplit="vertical"
 
 " syntastic
 let g:syntastic_always_populate_loc_list=1
@@ -466,6 +458,54 @@ vnoremap K :m '<-2<CR>gv=gv
 "" Open current line on GitHub
 nnoremap <Leader>o :.Gbrowse<CR>
 
+" Easy Align hooks
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)
+
+" Map CTRLPBuffer
+"noremap <C-P> :CtrlP<CR>
+"jnoremap <C-L> :CtrlPBuffer<CR>
+"nnoremap <leader>ssh :CtrlPSSH<CR>
+"nnoremap <leader>. :CtrlPTag<cr>
+
+" Ctags / Tagbar
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+nnoremap <silent> <Leader>ctr :!ctags -R -f ./.git/tags .<CR>
+
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_python_binary_path = 'python'
+
+" Open my VIMRC
+nnoremap <leader>ev :vsplit ${MYVIMRC}<cr>
+nnoremap <leader>sv :source ${MYVIMRC}<cr>
+inoremap jk <esc>
+"inoremap <esc> <nop>
+nnoremap <leader>gs :Git status<cr>
+nnoremap <leader>gd :Git diff<cr>
+nnoremap <leader>gp :Git push<cr>
+nnoremap <leader>gfm :Git pull origin master<cr>
+nnoremap <leader>gc :Gcommit<cr>
+nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>stm :SyntasticToggleMode<cr>
+nnoremap <leader>oh :e %<.h<cr>
+nnoremap <leader>oc :e %<.cpp<cr>
+inoremap <C-v> <esc>l"+gPa
+nnoremap <C-v> "+gPa
+vnoremap <C-c> "+y
+inoremap <C-c> <esc>bve"+y
+nnoremap <C-c> bve"+y
+nnoremap <A-q> :bd<cr>
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+nnoremap <silent> <A-Space> @=(foldlevel('.')?'zA':"\<Space>")<CR>
+vnoremap <Space> zf
+nnoremap <leader>w :bd<cr>
+cmap w!! w !sudo tee > /dev/null %
+
+
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
@@ -483,30 +523,6 @@ augroup completion_preview_close
   endif
 augroup END
 
-augroup go
-
-  au!
-  au Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-  au Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-  au Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-  au Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
-
-  au FileType go nmap <Leader>dd <Plug>(go-def-vertical)
-  au FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
-  au FileType go nmap <Leader>db <Plug>(go-doc-browser)
-
-  au FileType go nmap <leader>r  <Plug>(go-run)
-  au FileType go nmap <leader>t  <Plug>(go-test)
-  au FileType go nmap <Leader>gt <Plug>(go-coverage-toggle)
-  au FileType go nmap <Leader>i <Plug>(go-info)
-  au FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
-  au FileType go nmap <C-g> :GoDecls<cr>
-  au FileType go imap <C-g> <esc>:<C-u>GoDecls<cr>
-  au FileType go nmap <leader>rb :<C-u>call <SID>build_go_files()<CR>
-
-augroup END
-
-
 " html
 " for html files, 2 spaces
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
@@ -521,7 +537,6 @@ augroup vimrc-javascript
   autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2 smartindent
 augroup END
 
-
 " python
 " vim-python
 augroup vimrc-python
@@ -530,6 +545,16 @@ augroup vimrc-python
       \ formatoptions+=croq smartindent
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
+
+" rust
+" Vim racer
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+
+" typescript
+let g:yats_host_keyword = 1
 
 " jedi-vim
 let g:jedi#popup_on_dot = 0
@@ -605,76 +630,29 @@ endif
 " END VIM BOOTSTRAP: vim-bootstrap.com
 
 
-" Easy Align hooks
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-nmap <Leader>a <Plug>(EasyAlign)
-
-" Map CTRLPBuffer
-"noremap <C-P> :CtrlP<CR>
-"jnoremap <C-L> :CtrlPBuffer<CR>
-"nnoremap <leader>ssh :CtrlPSSH<CR>
-"nnoremap <leader>. :CtrlPTag<cr>
-
-" Ctags / Tagbar
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
-nnoremap <silent> <Leader>ctr :!ctags -R -f ./.git/tags .<CR>
-
-" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
-let g:ycm_python_binary_path = 'python'
-
-" Open my VIMRC
-nnoremap <leader>ev :vsplit ${MYVIMRC}<cr>
-nnoremap <leader>sv :source ${MYVIMRC}<cr>
-inoremap jk <esc>
-"inoremap <esc> <nop>
-nnoremap <leader>gs :Git status<cr>
-nnoremap <leader>gd :Git diff<cr>
-nnoremap <leader>gp :Git push<cr>
-nnoremap <leader>gfm :Git pull origin master<cr>
-nnoremap <leader>gc :Gcommit<cr>
-nnoremap <leader>gw :Gwrite<cr>
-nnoremap <leader>stm :SyntasticToggleMode<cr>
-nnoremap <leader>oh :e %<.h<cr>
-nnoremap <leader>oc :e %<.cpp<cr>
-inoremap <C-v> <esc>l"+gPa
-nnoremap <C-v> "+gPa
-vnoremap <C-c> "+y
-inoremap <C-c> <esc>bve"+y
-nnoremap <C-c> bve"+y
-nnoremap <A-q> :bd<cr>
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-nnoremap <silent> <A-Space> @=(foldlevel('.')?'zA':"\<Space>")<CR>
-vnoremap <Space> zf
-nnoremap <leader>w :bd<cr>
-cmap w!! w !sudo tee > /dev/null %
-
 " " NeoSolarized
-" set termguicolors
-" colorscheme NeoSolarized
-" set background=dark
-" " default value is "normal", Setting this option to "high" or "low" does use the 
-" " same Solarized palette but simply shifts some values up or down in order to 
-" " expand or compress the tonal range displayed.
-" let g:neosolarized_contrast = "normal"
+set termguicolors
+colorscheme NeoSolarized
+set background=dark
+" default value is "normal", Setting this option to "high" or "low" does use the 
+" same Solarized palette but simply shifts some values up or down in order to 
+" expand or compress the tonal range displayed.
+let g:neosolarized_contrast = "normal"
 
-" " Special characters such as trailing whitespace, tabs, newlines, when displayed 
-" " using ":set list" can be set to one of three levels depending on your needs. 
-" " Default value is "normal". Provide "high" and "low" options.
-" let g:neosolarized_visibility = "normal"
+" Special characters such as trailing whitespace, tabs, newlines, when displayed 
+" using ":set list" can be set to one of three levels depending on your needs. 
+" Default value is "normal". Provide "high" and "low" options.
+let g:neosolarized_visibility = "normal"
 
-" " I make vertSplitBar a transparent background color. If you like the origin solarized vertSplitBar
-" " style more, set this value to 0.
-" let g:neosolarized_vertSplitBgTrans = 1
+" I make vertSplitBar a transparent background color. If you like the origin solarized vertSplitBar
+" style more, set this value to 0.
+let g:neosolarized_vertSplitBgTrans = 1
 
-" " If you wish to enable/disable NeoSolarized from displaying bold, underlined or italicized 
-" " typefaces, simply assign 1 or 0 to the appropriate variable. Default values:  
-" let g:neosolarized_bold = 1
-" let g:neosolarized_underline = 1
-" let g:neosolarized_italic = 0
+" If you wish to enable/disable NeoSolarized from displaying bold, underlined or italicized 
+" typefaces, simply assign 1 or 0 to the appropriate variable. Default values:  
+let g:neosolarized_bold = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_italic = 0
 
 set mouse=a
 "set term=xterm
