@@ -336,6 +336,7 @@ set autoread
 "" Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
+noremap <Leader>w :<C-w>q
 
 "" Git
 noremap <Leader>ga :Gwrite<CR>
@@ -503,7 +504,6 @@ nnoremap <A-q> :bd<cr>
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 nnoremap <silent> <A-Space> @=(foldlevel('.')?'zA':"\<Space>")<CR>
 vnoremap <Space> zf
-nnoremap <leader>w :bd<cr>
 cmap w!! w !sudo tee > /dev/null %
 
 
