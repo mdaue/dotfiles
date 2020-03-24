@@ -61,6 +61,7 @@ endif
 
 " Schemes
 Plug 'altercation/vim-colors-solarized'
+Plug 'gryf/wombat256grf'
 
 " Miscellaneous
 Plug 'bronson/vim-trailing-whitespace'
@@ -109,7 +110,7 @@ Plug 'rust-lang/rust.vim'
 
 " typescript
 Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'ianks/vim-tsx'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -208,9 +209,9 @@ endif
 "" Scheme Configuration
 syntax enable
 set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
+colorscheme wombat256grf
+" let g:solarized_termcolors=256
+" let g:solarized_termtrans=1
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
