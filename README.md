@@ -8,6 +8,8 @@ Has a set of VIM plugins mostly for ease of developing in a variety of languages
 
 YouCompleteMe has to be compiled before use (cd into it's dir, git submodule update --init --recursive; ./install.sh --clang-completer)
 
+VIM will need to be compiled with Python3 support; https://github.com/ycm-core/YouCompleteMe/wiki/Building-Vim-from-source has the instructions.
+
 # ZSH
 Uses .zprezto, the setup script should automagically set everything up
 
