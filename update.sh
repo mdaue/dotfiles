@@ -1,5 +1,8 @@
 #!/bin/bash
 
+OH_MY_ZSH="${HOME}/.oh-my-zsh"
+ZSH_CUSTOM="${OH_MY_ZSH}/custom"
+
 function update
 {
     if [[ -z "$1" ]]; then
@@ -25,17 +28,6 @@ else
     OS="UNKNOWN"
 fi
 
-# Install NVIM
-if [[ -z $(which nvim) && "$OS" == "deb" ]]; then
-    sudo add-apt-repository ppa:neovim-ppa/stable
-    sudo apt-get update
-    sudo apt-get install -y neovim python-dev python-pip python3-dev python3-pip ctags
-    sudo apt-get install
-else
-    echo "Must install neovim and ctags manually"
-fi
-nvim +PluginUpdate +qall
-
 # Installs the git files by rsynching them... call this after updating your repo
 # copy git
 rsync -azP git/.gitconfig $HOME/
@@ -55,11 +47,6 @@ rsync -azP vim/.vimrc $HOME/
 # Start VIM plugin install
 vim +PluginInstall +qall
 
-# copy nvim
-rsync -azP nvim/.config $HOME/
-# Force a resync of the plugins
-rm -rf $HOME/.config/nvim/plugged
-
 # copy fish
 if [ ! -d "$HOME/.config/fish" ]
 then
@@ -70,8 +57,8 @@ fi
 PIP2=$(which pip2)
 PIP3=$(which pip3)
 
-if [ -z ${PIP2+x} ]; then pip2 install --upgrade virtualfish thefuck neovim; fi
-if [ -z ${PIP3+x} ]; then pip3 install --upgrade virtualfish thefuck neovim; fi
+if [ -z ${PIP2+x} ]; then pip2 install --upgrade virtualfish thefuck; fi
+if [ -z ${PIP3+x} ]; then pip3 install --upgrade virtualfish thefuck; fi
 
 echo "If using FISH, see http://virtualfish.readthedocs.io/en/latest/install.html#customizing-your-fish-prompt to customize your FISH prompt for virtualenvwrapper"
 
@@ -87,11 +74,12 @@ sudo systemctl enable i3lock.service
 # copy zsh stuff
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
     git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 else
     update $HOME/.oh-my-zsh
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+git clone https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
+ln -s "${ZSH_CUSTOM}/themes/spaceship-prompt/spaceship.zsh-theme" "${OH_MY_ZSH}/themes/spaceship.zsh-theme"
 
 rsync -azP zsh/.zshrc $HOME/.zshrc
 

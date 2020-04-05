@@ -12,12 +12,12 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=13
 
-ZSH_THEME="muse"
+ZSH_THEME="spaceship"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-plugins=(git autojump colorize common-aliases docker git git-extras git-flow history-substring-search python ssh-agent sudo systemd themes)
+plugins=(git autojump colorize common-aliases docker git git-extras git-flow history-substring-search python ssh-agent sudo systemd themes zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
@@ -83,7 +83,5 @@ if [[ ! -z $(command -v fzf) && ! -z $(command -v ag) ]]; then
   --color info:108,prompt:109,spinner:108,pointer:168,marker:168
   '
 fi
-
-PROMPT="$fg[cyan]%}$USER@%{$fg[blue]%}%m ${PROMPT}"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
