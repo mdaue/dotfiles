@@ -8,6 +8,7 @@ export WINEARCH=win32
 export WINEPREFIX=$HOME/.win32
 export GPGKEY=1AB7B0F8
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export PATH="$PATH:$HOME/bin"
 
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=13
@@ -17,7 +18,7 @@ DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-plugins=(git autojump colorize common-aliases docker git git-extras git-flow history-substring-search python ssh-agent sudo systemd themes zsh-autosuggestions)
+plugins=(git fasd colorize common-aliases docker git git-extras git-flow history-substring-search python ssh-agent sudo systemd themes zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
@@ -85,3 +86,5 @@ if [[ ! -z $(command -v fzf) && ! -z $(command -v ag) ]]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(pyenv init -)"
