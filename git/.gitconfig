@@ -61,8 +61,8 @@
 
   # Added from Sam's:
   subup = submodule update --recursive --merge --checkout --force
-  prom = pull --rebase origin master
-  prum = pull --rebase upstream master
+  prom = pull origin master
+  prum = pull upstream master
   prrsm = pull --recurse-submodules --rebase
   pom = push origin master
   pum = push upstream master
