@@ -28,6 +28,19 @@ else
     OS="UNKNOWN"
 fi
 
+if [[ $OSTYPE == "linux-gnu"* ]]; then
+    OS_SPECIFIC_SUBDIR="linux"
+elif [[ $OSTYPE == "darwin"* ]]; then
+    OS_SPECIFIC_SUBDIR="macos"
+else
+    echo "Unable to determine operating system (checked either for linux or mac)"
+    OS_SPECIFIC_SUBDIR=""
+fi
+
+if [[ $OSTYPE == "darwin"* ]]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 # Installs the git files by rsynching them... call this after updating your repo
 # copy git
 rsync -azP git/.gitconfig $HOME/
@@ -40,7 +53,22 @@ mkdir -p $HOME/bin
 rsync -azP bin/ $HOME/bin/
 
 # copy tmux
-rsync -azP tmux/.tmux.conf $HOME/
+rsync -azP tmux/$OS_SPECIFIC_SUBDIR/.tmux.conf $HOME/
+
+if [[ $OSTYPE == "darwin"* ]]; then
+    brew install vim
+    brew link vim
+fi
+
+if [[ $OSTYPE == "linux-gnu"* ]]; then
+    echo "Install pyenv manually"
+elif [[ $OSTYPE == "darwin"* ]]; then
+    brew install pyenv
+    CONFIGURE_OPTS=--enabled-shared pyenv install 3.9.1
+    pyenv global 3.9.1
+else
+    echo "Dunno OS"
+fi
 
 # copy vim
 rsync -azP vim/.vimrc $HOME/
@@ -67,9 +95,11 @@ rsync -azP fish/functions $HOME/.config/fish/
 rsync -azP fish/fishd "$HOME/.config/fish/fishd.`hostname`"
 
 # copy i3
-rsync -azP i3/.i3 $HOME/
-sudo cp i3/i3lock.service /etc/systemd/system/
-sudo systemctl enable i3lock.service
+if [[ $OSTYPE == "linux-gnu"* ]]; then
+    rsync -azP i3/.i3 $HOME/
+    sudo cp i3/i3lock.service /etc/systemd/system/
+    sudo systemctl enable i3lock.service
+fi
 
 # copy zsh stuff
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
@@ -81,13 +111,17 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins
 git clone https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
 ln -s "${ZSH_CUSTOM}/themes/spaceship-prompt/spaceship.zsh-theme" "${OH_MY_ZSH}/themes/spaceship.zsh-theme"
 
-rsync -azP zsh/.zshrc $HOME/.zshrc
+rsync -azP zsh/$OS_SPECIFIC_SUBDIR/.zshrc $HOME/.zshrc
 
 # copy systemd scripts
-rsync -azP systemd $HOME/.config/
+if [[ $OSTYPE == "linux-gnu"* ]]; then
+    rsync -azP systemd $HOME/.config/
+fi
 
 # copy screenlayouts
-rsync -azP screenlayout/.screenlayout $HOME/
+if [[ $OSTYPE == "linux-gnu"* ]]; then
+    rsync -azP screenlayout/.screenlayout $HOME/
+fi
 
 if [[ ! -d ~/.fzf ]]; then
     pushd $HOME
@@ -104,6 +138,9 @@ fi
 if [[ ! -f /usr/bin/git ]]; then
     if [[ "$OS" == "deb" ]]; then sudo apt-get install -y git; fi
     if [[ "$OS" == "rpm" ]]; then sudo yum install -y git; fi
+    if [[ $OSTYPE == "darwin"* ]]; then
+        brew install git
+    fi
 fi
 
 # Install AG
@@ -127,5 +164,10 @@ if [[ ! -d ~/.tmux/plugins/tpm ]]; then
     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 else
     update $HOME/.tmux/plugins/tpm
+fi
+
+if [[ $OSTYPE == "darwin"* ]]; then
+    brew install alacritty
+    cp -r alacritty ~/.config/
 fi
 
