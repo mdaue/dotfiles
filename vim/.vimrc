@@ -27,21 +27,30 @@ call plug#begin(expand('~/.vim/plugged'))
 "" Plug install packages
 "*****************************************************************************
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-scripts/grep.vim'
-Plug 'vim-scripts/CSApprox'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
-Plug 'w0rp/ale'
-Plug 'Yggdroot/indentLine'
-Plug 'avelino/vim-bootstrap-updater'
-Plug 'sheerun/vim-polyglot'
+Plug 'dense-analysis/ale'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
+Plug 'vimjas/vim-python-pep8-indent'
+Plug 'google/yapf'
+Plug 'sheerun/vim-polyglot'
+Plug 'python-mode/python-mode'
+
+"*****************************************************************************
+"" Auto Completion
+"*****************************************************************************
+Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc-python'
+Plug 'neoclide/coc-rls'
+Plug 'neoclide/coc-java'
+Plug 'coc-extensions/coc-omnisharp'
+Plug 'neoclide/coc-tsserver'
+Plug 'neoclide/coc-prettier'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -72,7 +81,6 @@ Plug 'scrooloose/syntastic'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'valloric/youcompleteme'
 
 " session management
 Plug 'tpope/vim-obsession'
@@ -82,35 +90,11 @@ Plug 'dhruvasagar/vim-prosession'
 Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 Plug 'ludwig/split-manpage.vim'
 
-" c#
-Plug 'OmniSharp/omnisharp-vim'
-
 " html
 "" HTML Bundle
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
-
-" javascript
-"" Javascript Bundle
-Plug 'jelera/vim-javascript-syntax'
-
-" python
-"" Python Bundle
-Plug 'davidhalter/jedi-vim'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-
-" rust
-" Vim racer
-Plug 'racer-rust/vim-racer'
-
-" Rust.vim
-Plug 'rust-lang/rust.vim'
-
-" typescript
-Plug 'leafgarland/typescript-vim'
-Plug 'ianks/vim-tsx'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -577,7 +561,7 @@ let g:airline#extensions#virtualenv#enabled = 1
 
 " Syntax highlight
 " Default highlight is better than polyglot
-let g:polyglot_disabled = ['python']
+"let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
 
 
@@ -631,93 +615,9 @@ endif
 
 " END VIM BOOTSTRAP: vim-bootstrap.com
 
-"" OmniSharp settings
-let g:OmniSharp_highlight_types = 3
-let g:OmniSharp_server_stdio = 1
-let g:OmniSharp_selector_ui = 'fzf'    " Use fzf.vim
-let g:OmniSharp_timeout = 5
-let g:OmniSharp_highlight_groups = {
-\ 'csUserIdentifier': [
-\   'constant name', 'enum member name', 'field name', 'identifier',
-\   'local name', 'parameter name', 'property name', 'static symbol'],
-\ 'csUserInterface': ['interface name'],
-\ 'csUserMethod': ['extension method name', 'method name'],
-\ 'csUserType': ['class name', 'enum name', 'namespace name', 'struct name']
-\}
-" Don't autoselect first omnicomplete option, show options even if there is only
-" one (so the preview documentation is accessible). Remove 'preview' if you
-" don't want to see any documentation whatsoever.
-set completeopt=longest,menuone,preview
-
-" Fetch full documentation during omnicomplete requests.
-" By default, only Type/Method signatures are fetched. Full documentation can
-" still be fetched when you need it with the :OmniSharpDocumentation command.
-"let g:omnicomplete_fetch_full_documentation = 1
-
 " Set desired preview window height for viewing documentation.
 " You might also want to look at the echodoc plugin.
 set previewheight=5
-
-" Tell ALE to use OmniSharp for linting C# files, and no other linters.
-let g:ale_linters = { 'cs': ['OmniSharp'] }
-
-" Update semantic highlighting after all text changes
-let g:OmniSharp_highlight_types = 3
-" Update semantic highlighting on BufEnter and InsertLeave
-" let g:OmniSharp_highlight_types = 2
-
-augroup omnisharp_commands
-    autocmd!
-
-    " Show type information automatically when the cursor stops moving.
-    " Note that the type is echoed to the Vim command line, and will overwrite
-    " any other messages in this space including e.g. ALE linting messages.
-    autocmd CursorHold *.cs OmniSharpTypeLookup
-
-    " The following commands are contextual, based on the cursor position.
-    autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
-
-    " Finds members in the current buffer
-    autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
-
-    autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
-    autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
-    autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
-
-    " Navigate up and down by method/property/field
-    autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
-    autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
-
-    " Find all code errors/warnings for the current solution and populate the quickfix window
-    autocmd FileType cs nnoremap <buffer> <Leader>cc :OmniSharpGlobalCodeCheck<CR>
-augroup END
-
-" Contextual code actions (uses fzf, CtrlP or unite.vim when available)
-nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
-" Run code actions with text selected in visual mode to extract method
-xnoremap <Leader><Space> :call OmniSharp#GetCodeActions('visual')<CR>
-
-" Rename with dialog
-nnoremap <Leader>nm :OmniSharpRename<CR>
-nnoremap <F2> :OmniSharpRename<CR>
-" Rename without dialog - with cursor on the symbol to rename: `:Rename newname`
-command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
-
-nnoremap <Leader>cf :OmniSharpCodeFormat<CR>
-
-" Start the omnisharp server for the current solution
-nnoremap <Leader>ss :OmniSharpStartServer<CR>
-nnoremap <Leader>sp :OmniSharpStopServer<CR>
-
-" Enable snippet completion
-let g:OmniSharp_want_snippet=1
-
-""
 
 set mouse=a
 "set term=xterm
@@ -741,141 +641,171 @@ if has("gui_running")
     set guifont="Droid Sans Mono:h10"
 endif
 
-" Enable deoplete at startup
-"let g:deoplete#enable_at_startup = 1
+"
+" COC bindings
+"
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
 
-" Cscope bindings
-if has("cscope")
+" TextEdit might fail if hidden is not set.
+set hidden
 
-    """"""""""""" Standard cscope/vim boilerplate
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
 
-    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-    set cscopetag
+" Give more space for displaying messages.
+set cmdheight=2
 
-    " check cscope for definition of a symbol before checking ctags: set to 1
-    " if you want the reverse search order.
-    set csto=0
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
 
-    " add any cscope database in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out  
-    " else add the database pointed to by environment variable 
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
-    " show msg when any other cscope db added
-    set cscopeverbose  
-
-
-    """"""""""""" My cscope/vim key mappings
-    "
-    " The following maps all invoke one of the following cscope search types:
-    "
-    "   's'   symbol: find all references to the token under cursor
-    "   'g'   global: find global definition(s) of the token under cursor
-    "   'c'   calls:  find all calls to the function name under cursor
-    "   't'   text:   find all instances of the text under cursor
-    "   'e'   egrep:  egrep search for the word under cursor
-    "   'f'   file:   open the filename under cursor
-    "   'i'   includes: find files that include the filename under cursor
-    "   'd'   called: find functions that function under cursor calls
-    "
-    " Below are three sets of the maps: one set that just jumps to your
-    " search result, one that splits the existing vim window horizontally and
-    " diplays your search result in the new window, and one that does the same
-    " thing, but does a vertical split instead (vim 6 only).
-    "
-    " I've used CTRL-\ and CTRL-@ as the starting keys for these maps, as it's
-    " unlikely that you need their default mappings (CTRL-\'s default use is
-    " as part of CTRL-\ CTRL-N typemap, which basically just does the same
-    " thing as hitting 'escape': CTRL-@ doesn't seem to have any default use).
-    " If you don't like using 'CTRL-@' or CTRL-\, , you can change some or all
-    " of these maps to use other keys.  One likely candidate is 'CTRL-_'
-    " (which also maps to CTRL-/, which is easier to type).  By default it is
-    " used to switch between Hebrew and English keyboard mode.
-    "
-    " All of the maps involving the <cfile> macro use '^<cfile>$': this is so
-    " that searches over '#include <time.h>" return only references to
-    " 'time.h', and not 'sys/time.h', etc. (by default cscope will return all
-    " files that contain 'time.h' as part of their name).
-
-
-    " To do the first type of search, hit 'CTRL-\', followed by one of the
-    " cscope search types above (s,g,c,t,e,f,i,d).  The result of your cscope
-    " search will be displayed in the current window.  You can use CTRL-T to
-    " go back to where you were before the search.  
-    "
-
-    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
-
-
-    " Using 'CTRL-spacebar' (intepreted as CTRL-@ by vim) then a search type
-    " makes the vim window split horizontally, with search result displayed in
-    " the new window.
-    "
-    " (Note: earlier versions of vim may not have the :scs command, but it
-    " can be simulated roughly via:
-    "    nmap <C-@>s <C-W><C-S> :cs find s <C-R>=expand("<cword>")<CR><CR>	
-
-    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
-
-
-    " Hitting CTRL-space *twice* before the search type does a vertical 
-    " split instead of a horizontal one (vim 6 and up only)
-    "
-    " (Note: you may wish to put a 'set splitright' in your .vimrc
-    " if you prefer the new window on the right instead of the left
-
-    nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-    nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
-
-
-    """"""""""""" key map timeouts
-    "
-    " By default Vim will only wait 1 second for each keystroke in a mapping.
-    " You may find that too short with the above typemaps.  If so, you should
-    " either turn off mapping timeouts via 'notimeout'.
-    "
-    "set notimeout 
-    "
-    " Or, you can keep timeouts, by uncommenting the timeoutlen line below,
-    " with your own personal favorite value (in milliseconds):
-    "
-    "set timeoutlen=4000
-    "
-    " Either way, since mapping timeout settings by default also set the
-    " timeouts for multicharacter 'keys codes' (like <F1>), you should also
-    " set ttimeout and ttimeoutlen: otherwise, you will experience strange
-    " delays as vim waits for a keystroke after you hit ESC (it will be
-    " waiting to see if the ESC is actually part of a key code like <F1>).
-    "
-    "set ttimeout 
-    "
-    " personally, I find a tenth of a second to work well for key code
-    " timeouts. If you experience problems and have a slow terminal or network
-    " connection, set it higher.  If you don't set ttimeoutlen, the value for
-    " timeoutlent (default: 1000 = 1 second, which is sluggish) is used.
-    "
-    "set ttimeoutlen=100
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
 endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
