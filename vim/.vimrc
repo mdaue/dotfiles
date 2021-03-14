@@ -44,13 +44,7 @@ Plug 'python-mode/python-mode'
 "*****************************************************************************
 "" Auto Completion
 "*****************************************************************************
-Plug 'neoclide/coc.nvim'
-Plug 'neoclide/coc-python'
-Plug 'neoclide/coc-rls'
-Plug 'neoclide/coc-java'
-Plug 'coc-extensions/coc-omnisharp'
-Plug 'neoclide/coc-tsserver'
-Plug 'neoclide/coc-prettier'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -98,6 +92,7 @@ Plug 'mattn/emmet-vim'
 
 "*****************************************************************************
 "*****************************************************************************
+
 
 " Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))
@@ -534,27 +529,6 @@ augroup vimrc-python
       \ formatoptions+=croq smartindent
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
-
-" rust
-" Vim racer
-au FileType rust nmap gd <Plug>(rust-def)
-au FileType rust nmap gs <Plug>(rust-def-split)
-au FileType rust nmap gx <Plug>(rust-def-vertical)
-au FileType rust nmap <leader>gd <Plug>(rust-doc)
-
-" typescript
-let g:yats_host_keyword = 1
-
-" jedi-vim
-let g:jedi#popup_on_dot = 0
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-"let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#smart_auto_mappings = 0
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
