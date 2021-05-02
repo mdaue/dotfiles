@@ -63,6 +63,7 @@ alias ad='asciidoctor -r asciidoctor-diagram -r asciidoctor-plantuml -b html5 '
 
 alias python='python3'
 alias pip='pip3'
+alias protontricks-flat='flatpak run --command=protontricks com.valvesoftware.Steam'
 
 # thefuck
 eval $(thefuck --alias)
