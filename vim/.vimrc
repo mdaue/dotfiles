@@ -91,6 +91,7 @@ Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
 " bazel
+Plug 'google/vim-maktaba'
 Plug 'bazelbuild/vim-bazel'
 
 "*****************************************************************************
