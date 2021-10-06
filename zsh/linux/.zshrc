@@ -8,7 +8,7 @@ export WINEARCH=win32
 export WINEPREFIX=$HOME/.win32
 export GPGKEY=1AB7B0F8
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=13
