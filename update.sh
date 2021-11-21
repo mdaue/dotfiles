@@ -110,6 +110,8 @@ fi
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
 git clone https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
 ln -s "${ZSH_CUSTOM}/themes/spaceship-prompt/spaceship.zsh-theme" "${OH_MY_ZSH}/themes/spaceship.zsh-theme"
+mkdir -p ~/.oh-my-zsh/plugins/bazel
+wget -P ~/.oh-my-zsh/plugins https://raw.githubusercontent.com/bazelbuild/bazel/master/scripts/zsh_completion/_bazel
 
 rsync -azP zsh/$OS_SPECIFIC_SUBDIR/.zshrc $HOME/.zshrc
 
