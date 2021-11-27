@@ -482,11 +482,6 @@ nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>stm :SyntasticToggleMode<cr>
 nnoremap <leader>oh :e %<.h<cr>
 nnoremap <leader>oc :e %<.cpp<cr>
-inoremap <C-v> <esc>l"+gPa
-nnoremap <C-v> "+gPa
-vnoremap <C-c> "+y
-inoremap <C-c> <esc>bve"+y
-nnoremap <C-c> bve"+y
 nnoremap <A-q> :bd<cr>
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 nnoremap <silent> <A-Space> @=(foldlevel('.')?'zA':"\<Space>")<CR>
