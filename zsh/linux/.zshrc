@@ -8,7 +8,7 @@ export WINEARCH=win32
 export WINEPREFIX=$HOME/.win32
 export GPGKEY=1AB7B0F8
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
 
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=13
@@ -18,7 +18,7 @@ DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-plugins=(git fasd colorize common-aliases docker git git-extras git-flow history-substring-search python ssh-agent sudo systemd themes zsh-autosuggestions bazel)
+plugins=(git fasd autojump colorize common-aliases docker git git-extras git-flow history-substring-search python ssh-agent sudo systemd themes zsh-autosuggestions bazel)
 
 source $ZSH/oh-my-zsh.sh
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
@@ -65,6 +65,8 @@ alias python='python3'
 alias pip='pip3'
 alias protontricks-flat='flatpak run --command=protontricks com.valvesoftware.Steam'
 
+alias clock='clockify-cli'
+
 # thefuck
 eval $(thefuck --alias)
 
@@ -89,3 +91,10 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(pyenv init -)"
+eval "$(pyenv init -)"
+
+function sync_home() {
+    rsync --update -raz --progress ~/dev $1:~/dev
+    rsync --update -raz --progress ~/Documents $1:~/Documents
+    rsync --update -raz --progress ~/notes $1:~/notes
+}
