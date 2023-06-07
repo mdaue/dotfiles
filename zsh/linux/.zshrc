@@ -8,7 +8,8 @@ export WINEARCH=win32
 export WINEPREFIX=$HOME/.win32
 export GPGKEY=1AB7B0F8
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin:/usr/local/go/bin"
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=13
@@ -67,6 +68,17 @@ alias protontricks-flat='flatpak run --command=protontricks com.valvesoftware.St
 
 alias clock='clockify-cli'
 
+alias m4b-tool='docker run -it --rm -u $(id -u):$(id -g) -v "$(pwd)":/mnt m4b-tool'
+alias sdkmanager='docker run --privileged --rm -it --name "JetPack_NX_DevKit" --network host -v /data/nvidia/sdk20:/home/nvidia sdkmanager:1.8.0.10363-Ubuntu_20.04'
+alias sdkmanager18='docker run --privileged --rm -it --name "JetPack_NX_DevKit" --network host -v /data/nvidia/sdk18:/home/nvidia sdkmanager:1.8.0.10363-Ubuntu_18.04'
+
+alias nebula-cert='/snap/nebula/59/bin/nebula-cert'
+
+alias portainer='docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest'
+
+alias rsyn='rsync -avz --progress --compress'
+alias go_swagger='docker run --rm -it  --user $(id -u):$(id -g) -e GOPATH=$(go env GOPATH):/go -v $HOME:$HOME -w $(pwd) quay.io/goswagger/swagger'
+
 # thefuck
 eval $(thefuck --alias)
 
@@ -91,10 +103,10 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(pyenv init -)"
-eval "$(pyenv init -)"
 
 function sync_home() {
     rsync --update -raz --progress ~/dev $1:~/dev
     rsync --update -raz --progress ~/Documents $1:~/Documents
     rsync --update -raz --progress ~/notes $1:~/notes
 }
+source ~/.zshrc.local
