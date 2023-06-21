@@ -39,7 +39,10 @@ Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
 Plug 'vimjas/vim-python-pep8-indent'
 Plug 'google/yapf'
 Plug 'sheerun/vim-polyglot'
-Plug 'python-mode/python-mode'
+Plug 'github/copilot.vim'
+Plug 'puremourning/vimspector'
+Plug 'google/vim-maktaba'
+Plug 'bazelbuild/vim-bazel'
 
 "*****************************************************************************
 "" Auto Completion
@@ -392,6 +395,7 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_python_python_exec = "/usr/bin/python3"
 let g:syntastic_python_checkers=['python3', 'flake8']
+let g:syntastic_python_pylint_post_args="--max-line-length=120"
 
 " Tagbar
 nmap <silent> <F4> :TagbarToggle<CR>
@@ -585,6 +589,8 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
+let g:pymode_lint_ignore = "E501,W"
 
 " END VIM BOOTSTRAP: vim-bootstrap.com
 
