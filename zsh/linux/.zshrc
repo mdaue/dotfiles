@@ -24,6 +24,8 @@ plugins=(git fasd autojump colorize common-aliases docker git git-extras git-flo
 source $ZSH/oh-my-zsh.sh
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
     source /usr/local/bin/virtualenvwrapper.sh
+elif [ -f "/usr/share/virtualenvwrapper/virtualenvwrapper.sh" ]; then
+    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 else
     source /usr/bin/virtualenvwrapper.sh
 fi
@@ -79,9 +81,6 @@ alias portainer='docker run -d -p 8000:8000 -p 9443:9443 --name portainer --rest
 alias rsyn='rsync -avz --progress --compress'
 alias go_swagger='docker run --rm -it  --user $(id -u):$(id -g) -e GOPATH=$(go env GOPATH):/go -v $HOME:$HOME -w $(pwd) quay.io/goswagger/swagger'
 
-# thefuck
-eval $(thefuck --alias)
-
 # fzf via local installation
 if [ -e ~/.fzf ]; then
   PATH=$PATH:~/.fzf/bin
@@ -110,3 +109,6 @@ function sync_home() {
     rsync --update -raz --progress ~/notes $1:~/notes
 }
 source ~/.zshrc.local
+
+poetry config virtualenvs.in-project true
+

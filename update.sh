@@ -85,9 +85,6 @@ fi
 PIP2=$(which pip2)
 PIP3=$(which pip3)
 
-if [ -z ${PIP2+x} ]; then pip2 install --upgrade virtualfish thefuck; fi
-if [ -z ${PIP3+x} ]; then pip3 install --upgrade virtualfish thefuck; fi
-
 echo "If using FISH, see http://virtualfish.readthedocs.io/en/latest/install.html#customizing-your-fish-prompt to customize your FISH prompt for virtualenvwrapper"
 
 rsync -azP fish/config.fish $HOME/.config/fish/
@@ -175,16 +172,18 @@ fi
 
 # Install Pyenv
 if [[ -f /usr/bin/git ]]; then
-    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-    cd ~/.pyenv && src/configure && make -C src
+    curl https://pyenv.run | bash
 
     echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zprofile
     echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zprofile
     echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
+    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zprofile
 
     echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
     echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
     echo 'eval "$(pyenv init --path)"' >> ~/.profile
+    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.profile
 
     echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
 fi
